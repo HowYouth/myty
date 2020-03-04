@@ -5,6 +5,7 @@ import com.hallth.mapper.MytyDengmiTempMapper;
 import com.hallth.mapper.MytyParamMapper;
 import com.hallth.service.MytyDengmiTempService;
 import com.hallth.utils.DatabaseUtils;
+import com.hallth.utils.SeqCreate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +21,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     private MytyDengmiTempMapper dengmiTempMapper;
     @Resource
     private MytyParamMapper paramMapper;
+
+    @Resource
+    private MytyAgendaServiceImpl agendaService;
+
+    @Resource
+    private SeqCreate seqCreate;
 
     @Override
     public List<MytyDengmiTemp> selectByUserId(String loginUserId) {
@@ -46,6 +53,15 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         dengmiTemp.setAgendaRoundNo(roundNo);
         List<MytyDengmiTemp> list = dengmiTempMapper.selectByUserIdPageQuery(dengmiTemp);
         int total = dengmiTempMapper.selectByUserIdPageQueryCount(dengmiTemp);
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        int inputCount = agenda.getInputCount();
+        if(list == null || list.size() < inputCount){
+            int addNull = inputCount - list.size();
+            for(int i = 0; i < addNull; i ++){
+                MytyDengmiTemp dengmi = createDengmiTemp();
+                list.add(dengmi);
+            }
+        }
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 0);
         map.put("msg", "");
@@ -53,6 +69,14 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         map.put("data",list);
         return map;
     }
+
+    public MytyDengmiTemp createDengmiTemp(){
+        int dengmiTempId = seqCreate.getNextDengmiTempId();
+        MytyDengmiTemp dengmi = new MytyDengmiTemp();
+        dengmi.setDmTempId(dengmiTempId);
+        return dengmi;
+    }
+
 
     @Override
     public Map<String, Object> selectNoAnswersPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize) {

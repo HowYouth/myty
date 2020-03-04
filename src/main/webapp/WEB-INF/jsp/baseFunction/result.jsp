@@ -34,27 +34,64 @@
 <div id="this_score_search_tool" style="padding:3px">
     <span>轮次:</span>
     <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_this_score" style="width: 100px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doThisScoreSearch()"><i class="icon-search"></i> 查询</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doThisScoreSearch()">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chaxun"></use>
+        </svg>
+        查询
+    </a>
 </div>
 <div id="answer_score_search_tool" style="padding:3px">
     <span>轮次:</span>
     <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_answer_score" style="width: 100px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doAnswerScoreSearch()"><i class="icon-search"></i> 查询</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doAnswerScoreSearch()">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chaxun"></use>
+        </svg>
+        查询
+    </a>
 </div>
 <div id="subject_score_search_tool" style="padding:3px">
     <span>轮次:</span>
     <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_subject_score" style="width: 100px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSubjectScoreSearch()"><i class="icon-search"></i> 查询</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSubjectScoreSearch()">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chaxun"></use>
+        </svg>
+        查询
+    </a>
 </div>
 <div id="good_subject_search_tool" style="padding:3px">
     <span>轮次:</span>
     <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_good_subject" style="width: 100px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()"><i class="icon-search"></i> 查询</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chaxun"></use>
+        </svg>
+        查询
+    </a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-export"></use>
+        </svg>
+        导出
+    </a>
 </div>
 <div id="all_subject_search_tool" style="padding:3px">
     <span>轮次:</span>
     <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_all_subject" style="width: 100px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doAllSubjectSearch()"><i class="icon-search"></i> 查询</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doAllSubjectSearch()">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chaxun"></use>
+        </svg>
+        查询
+    </a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-export"></use>
+        </svg>
+        导出
+    </a>
 </div>
 </body>
 <%--本轮得分榜--%>
