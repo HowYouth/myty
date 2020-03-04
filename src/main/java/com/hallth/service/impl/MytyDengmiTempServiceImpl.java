@@ -132,10 +132,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     public Map<String, Object> getInputSubjectCounts(MytyAgenda agenda) {
         List<SaikuangBean> list = dengmiTempMapper.getInputSubjectCounts(agenda);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",0);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",0);
+//        map.put("data",list);
+        map.put("total",0);
+        map.put("rows",list);
         return map;
     }
 

@@ -49,10 +49,12 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
     public Map<String, Object> getInputAnswerCounts(MytyAgenda agenda) {
         List<SaikuangBean> list = answerMapper.getInputAnswerCounts(agenda);
         Map<String, Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",0);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",0);
+//        map.put("data",list);
+        map.put("total",0);
+        map.put("rows",list);
         return map;
     }
 
@@ -60,10 +62,12 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
     public Map<String, Object> getJudgeCounts(MytyAgenda agenda) {
         List<SaikuangBean> list = answerMapper.getJudgeCounts(agenda);
         Map<String, Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",0);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",0);
+//        map.put("data",list);
+        map.put("total",0);
+        map.put("rows",list);
         return map;
     }
 
