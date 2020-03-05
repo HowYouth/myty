@@ -272,7 +272,7 @@
     </select>
 
     <select id="userCompetitionDetail" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
-select temp.rownum,temp.dm_mimian, temp.dm_mimu, temp.dm_midi, temp.dm_mimianzhu,temp.dm_midizhu,
+select temp.rownum,temp.dm_mimian, temp.dm_mimu, temp.dm_midi, temp.dm_mimianzhu,temp.dm_midizhu,temp.dm_temp_id as dm_id,
        temp.user_subject_score, temp.right_proportion from (
 select (@rownum := @rownum + 1) AS rownum, L.* from (
 select dm.agenda_round_no,dm.dm_temp_id, u1.user_name as author, u1.user_id,

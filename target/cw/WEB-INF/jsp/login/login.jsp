@@ -3,7 +3,7 @@
 <head>
     <title>谜苑天涯-登录</title>
     <link href="favicon.ico" rel="shortcut icon"/>
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/layui/css/layui.css" />
     <link rel="stylesheet" href="/css/mycss.css" />
     <script type="text/javascript" src="/js/jquery.min.js"></script>

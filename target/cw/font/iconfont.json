@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9058022",
+      "name": "数据库",
+      "font_class": "dbsource",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "5296076",
+      "name": "导入",
+      "font_class": "import",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "11639719",
+      "name": "导出",
+      "font_class": "export",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
       "icon_id": "7576324",
       "name": "数据统计表",
       "font_class": "shujutongjibiao",

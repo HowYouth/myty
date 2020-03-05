@@ -269,7 +269,7 @@
 
     <select id="userAnswerDetailTable" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
         select dm.dm_mimian,dm.dm_mimu,dm.dm_midi,dm.dm_mimianzhu,dm.dm_midizhu,dm.dm_author as dm_author_id, u1.user_name as dm_author_name, a.user_answer,
-        u2.user_name, a.user_id,
+        u2.user_name, a.user_id,dm_temp_id as dm_id,
         case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end as user_answer_score
         from myty_dengmi_temp dm
         left join myty_answer a on a.agenda_round_no = dm.agenda_round_no and a.dm_id=dm.dm_temp_id
