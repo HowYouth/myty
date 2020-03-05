@@ -28,6 +28,7 @@
         // title:'当前赛况',
         fit:true, //自适应高度
         singleSelect: true,
+        nowrap: false,
         url: '/saikuang/dangqiansaikuang',
         rownumbers: true,
         pagination: false,

@@ -157,10 +157,13 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         scoreQueryBean.setDm_author_id(userId);
         List<ScoreQueryBean> list = answerMapper.userScoreDetailTable(scoreQueryBean);
         Map <String, Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",1);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",1);
+//        map.put("data",list);
+
+        map.put("total",1);
+        map.put("rows",list);
         return map;
     }
 
@@ -174,10 +177,12 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         List<ScoreQueryBean> list = answerMapper.userAnswerDetailTable(scoreQueryBean);
         int total = answerMapper.userAnswerDetailTableCount(scoreQueryBean);
         Map <String, Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count", total);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count", total);
+//        map.put("data",list);
+        map.put("total", total);
+        map.put("rows",list);
         return map;
     }
 
@@ -187,13 +192,15 @@ public class MytyAnswerServiceImpl implements MytyAnswerService {
         param.setDm_id(dmId);
         param.setStartRow(DatabaseUtils.getStartRow(currentPage, pageSize));
         param.setPageSize(pageSize);
-        List<DengmiQueryBean> list = answerMapper.dengmiAnswerDetailTable(param);
+        List<ScoreQueryBean> list = answerMapper.dengmiAnswerDetailTable(param);
         int total = answerMapper.dengmiAnswerDetailTableCount(param);
         Map <String, Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count", total);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count", total);
+//        map.put("data",list);
+        map.put("total", total);
+        map.put("rows",list);
         return map;
     }
 }

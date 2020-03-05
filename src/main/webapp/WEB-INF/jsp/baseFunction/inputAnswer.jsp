@@ -18,6 +18,24 @@
     <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
+<div style="padding: 15px;background-color: #996600; color: #fff;">
+    小贴士:
+</div>
+<div style="padding: 4px; border-left: 1px solid #996600; border-right: 1px solid #996600">
+    1.集锦谜谜底用/隔开，注意用半角符号，而不是全角符号“／”。
+</div>
+<div style="padding: 4px; border-left: 1px solid #996600; border-right: 1px solid #996600">
+    2.探骊、隐目等带目的谜底或谜目为“某某冠某”、“某某带某”之类者，谜底连写，不加分隔符号。
+</div>
+<div style="padding: 4px; border-left: 1px solid #996600; border-right: 1px solid #996600">
+    3.谜目与谜格之间用/或者·隔开，不必用括号将谜目括起来。
+</div>
+<div style="padding: 4px; border-left: 1px solid #996600; border-right: 1px solid #996600">
+    4.谜面注解栏用于对谜面出处等作一简单注释，猜射和评谜时将显示出来。可不填。
+</div>
+<div style="padding: 4px; border-left: 1px solid #996600; border-right: 1px solid #996600;border-bottom: 1px solid #996600">
+    5.谜底注解栏用于对谜面和谜底扣合的可能引起误会之处作一注解，评分时将显示谜底注解，以免出现误评。可不填。
+</div>
 <div style="padding: 15px;">
     <table id="demo" lay-filter="test"></table>
 </div>
@@ -37,8 +55,8 @@
             , cols: [[ //表头
                 {field: 'dm_mimian', title: '谜面', width: 500, fixed: 'left'}
                 , {field: 'dm_mimu', title: '谜目'}
-                , {field: 'dm_mimianzhu', title: '谜面注解'}
                 , {field: 'user_answer', edit: 'text', title: '谜底'}
+                , {field: 'dm_mimianzhu', title: '谜面注解'}
             ]]
         });
 

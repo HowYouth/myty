@@ -22,7 +22,7 @@
 <div region="north" style="width:100%; height: 10%">
     <div class="easyui-layout" style="width: 100%; height: 100%;">
         <div region="west" style="width:230px; height: 100%;" id="logo"></div>
-        <div region="center" class="top-bgc top-header">
+        <div region="center" class="top-bgc top-header" style="line-height:80px;">
             谜苑天涯内赛${saiji}赛季
         </div>
         <div region="east" style="width:230px; height: 100%" class="top-bgc">
@@ -32,8 +32,10 @@
         </div>
     </div>
 </div>
-<div region="south" id="footer" style="text-align: center; height: 6%">谜苑天涯内赛系统<br/><span
-        class="iconfont icon-uniE"></span>copyright@谜苑天涯 ${saiji} </div>
+<div region="south" id="footer" style="text-align: center; height: 6%; line-height:26px;">
+    谜苑天涯内赛系统<br/>
+    <span class="iconfont icon-uniE"></span>copyright@谜苑天涯 ${saiji}
+</div>
 <div region="west" split="true" title="菜单栏" style="width: 230px;">
     <div id="menu-content" class="easyui-accordion"
          style="position: absolute; top: 27px; left: 0px; right: 0px; bottom: 0px;">

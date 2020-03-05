@@ -209,10 +209,13 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         List<ScoreQueryBean> list = dengmiTempMapper.userCompetitionDetail(queryBean);
         int total = dengmiTempMapper.userCompetitionDetailCount(queryBean);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",total);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",total);
+//        map.put("data",list);
+
+        map.put("total",total);
+        map.put("rows",list);
         return map;
     }
 
@@ -222,10 +225,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         dengmiQueryBean.setDm_temp_id(dmId);
         List<DengmiQueryBean> list = dengmiTempMapper.dengmiDetailTable(dengmiQueryBean);
         Map <String, Object> map = new HashMap<>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count", list.size());
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count", list.size());
+//        map.put("data",list);
+        map.put("total", list.size());
+        map.put("rows",list);
         return map;
     }
 }

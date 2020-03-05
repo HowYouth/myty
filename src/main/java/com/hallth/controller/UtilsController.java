@@ -23,7 +23,8 @@ public class UtilsController {
     @RequestMapping(value = "/userCompetitionDetail", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> userCompetitionDetail(HttpServletRequest request, Model model) {
         int currentPage = Integer.parseInt(request.getParameter("page"));
-        int pageSize = Integer.parseInt(request.getParameter("limit"));
+//        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int pageSize = Integer.parseInt(request.getParameter("rows"));
         int roundNo = Integer.parseInt(request.getParameter("roundNo"));
         String userId = request.getParameter("userId");
         Map<String, Object> map = dengmiTempService.userCompetitionDetail(roundNo, userId, currentPage, pageSize);
@@ -41,7 +42,8 @@ public class UtilsController {
     public Map<String, Object> userAnswerDetailTable(HttpServletRequest request, Model model) {
         String userId = request.getParameter("userId");
         int roundNo = Integer.parseInt(request.getParameter("roundNo"));
-        int pageSize = Integer.parseInt(request.getParameter("limit"));
+//        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int pageSize = Integer.parseInt(request.getParameter("rows"));
         int currentPage = Integer.parseInt(request.getParameter("page"));
         Map<String, Object> map = answerService.userAnswerDetailTable(userId, roundNo, currentPage, pageSize);
         return map;
@@ -50,7 +52,8 @@ public class UtilsController {
     @RequestMapping(value = "/dengmiAnswerDetailTable", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> dengmiAnswerDetailTable(HttpServletRequest request, Model model) {
         int dmId = Integer.parseInt(request.getParameter("dmId"));
-        int pageSize = Integer.parseInt(request.getParameter("limit"));
+//        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int pageSize = Integer.parseInt(request.getParameter("rows"));
         int currentPage = Integer.parseInt(request.getParameter("page"));
         Map<String, Object> map = answerService.dengmiAnswerDetailTable(dmId, currentPage, pageSize);
         return map;

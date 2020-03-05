@@ -17,7 +17,6 @@
     <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
-<h2>谜苑天涯内赛系统使用说明</h2>
 <div class="layui-collapse" lay-accordion="">
     <div class="layui-colla-item">
         <h2 class="layui-colla-title">1.基本功能及使用</h2>

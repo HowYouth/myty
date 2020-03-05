@@ -54,7 +54,7 @@ public interface MytyAnswerMapper {
 
     int userAnswerDetailTableCount(ScoreQueryBean scoreQueryBean);
 
-    List<DengmiQueryBean> dengmiAnswerDetailTable(ScoreQueryBean dengmiQueryBean);
+    List<ScoreQueryBean> dengmiAnswerDetailTable(ScoreQueryBean dengmiQueryBean);
 
     int dengmiAnswerDetailTableCount(ScoreQueryBean dengmiQueryBean);
 
