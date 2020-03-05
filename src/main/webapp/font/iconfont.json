@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9058022",
+      "name": "数据库",
+      "font_class": "dbsource",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
       "icon_id": "5296076",
       "name": "导入",
       "font_class": "import",
