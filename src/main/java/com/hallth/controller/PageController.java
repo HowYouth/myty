@@ -164,8 +164,8 @@ public class PageController {
         return "developDetail/developDetail";
     }
 
-    @RequestMapping(value="/toDatabaseOperatioin", method = {RequestMethod.GET, RequestMethod.POST})
-    public String toDatabaseOperatioin(HttpServletRequest request, Model model){
+    @RequestMapping(value="/toDatabaseOperation", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toDatabaseOperation(HttpServletRequest request, Model model){
         return "developDetail/databaseOperation";
     }
 }

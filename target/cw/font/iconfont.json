@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6937054",
+      "name": "开发者",
+      "font_class": "kaifazhe",
+      "unicode": "e725",
+      "unicode_decimal": 59173
+    },
+    {
+      "icon_id": "7803256",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "588225",
+      "name": "跑",
+      "font_class": "run",
+      "unicode": "e70f",
+      "unicode_decimal": 59151
+    },
+    {
       "icon_id": "9058022",
       "name": "数据库",
       "font_class": "dbsource",

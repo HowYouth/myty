@@ -22,7 +22,7 @@
 <div region="north" style="width:100%; height: 10%">
     <div class="easyui-layout" style="width: 100%; height: 100%;">
         <div region="west" style="width:230px; height: 100%;" id="logo"></div>
-        <div region="center" class="top-bgc top-header" style="line-height:80px;">
+        <div region="center" class="top-bgc top-header">
             谜苑天涯内赛${saiji}赛季
         </div>
         <div region="east" style="width:230px; height: 100%" class="top-bgc">
@@ -32,7 +32,7 @@
         </div>
     </div>
 </div>
-<div region="south" id="footer" style="text-align: center; height: 6%; line-height:26px;">
+<div region="south" id="footer" style="text-align: center; height: 6%;">
     谜苑天涯内赛系统<br/>
     <span class="iconfont icon-uniE"></span>copyright@谜苑天涯 ${saiji}
 </div>
@@ -41,7 +41,7 @@
          style="position: absolute; top: 27px; left: 0px; right: 0px; bottom: 0px;">
         <%--普通用户的基本功能--%>
         <c:if test="${loginUser.userRole == 0}">
-            <div title="基本功能" iconcls="iconfont icon-timu" style="overflow: auto; padding: 0px;">
+            <div title="基本功能" iconcls="iconfont icon-caidan" style="overflow: auto; padding: 0px;">
                 <c:forEach varStatus="status" items="${menu}" var="itemP">
                     <c:if test="${itemP.parentMenu == '0' && itemP.menuRole == '0' && itemP.menuType == 1}">
                         <li class="sys-menu-li">
@@ -60,7 +60,7 @@
         </c:if>
         <%--友情链接：管理员界面不显示--%>
         <c:if test="${loginUser.userRole == 0}">
-            <div title="友情链接" iconcls="iconfont icon-timu" style="overflow: auto; padding: 0px;">
+            <div title="友情链接" iconcls="iconfont icon-caidan" style="overflow: auto; padding: 0px;">
                 <c:forEach varStatus="status" items="${menu}" var="itemP">
                     <c:if test="${itemP.parentMenu == '0' && itemP.menuRole == '0' && itemP.menuType == 2}">
                         <li class="sys-menu-li">
@@ -79,7 +79,7 @@
         </c:if>
         <%--开发者菜单--%>
         <c:if test="${loginUser.isDeveloper == 1}">
-            <div title="系统开发" iconcls="iconfont icon-timu" style="overflow: auto; padding: 0px;">
+            <div title="系统开发" iconcls="iconfont icon-caidan" style="overflow: auto; padding: 0px;">
                 <c:forEach varStatus="status" items="${menu}" var="itemP">
                     <c:if test="${itemP.parentMenu == '0' && itemP.menuRole == '2' && itemP.menuType == 3}">
                         <li class="sys-menu-li">
@@ -98,7 +98,7 @@
         </c:if>
         <%--管理员菜单--%>
         <c:if test="${loginUser.userRole == 1}">
-            <div title="基本功能" iconcls="iconfont icon-timu" style="overflow: auto; padding: 0px;">
+            <div title="基本功能" iconcls="iconfont icon-caidan" style="overflow: auto; padding: 0px;">
                 <c:forEach varStatus="status" items="${menu}" var="itemP">
                     <c:if test="${itemP.parentMenu == '0' && itemP.menuRole == '1' && itemP.menuType == 1}">
                         <li class="sys-menu-li">

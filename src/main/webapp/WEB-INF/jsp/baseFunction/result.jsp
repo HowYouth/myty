@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/mycss.css">
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/myjs.js"></script>
     <script src="/font/iconfont.js"></script>
 </head>
 <body>
@@ -33,7 +34,8 @@
 </div>
 <div id="this_score_search_tool" style="padding:3px">
     <span>轮次:</span>
-    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_this_score" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_this_score"
+            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
     <a href="#" class="easyui-linkbutton" plain="true" onclick="doThisScoreSearch()">
         <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chaxun"></use>
@@ -43,7 +45,8 @@
 </div>
 <div id="answer_score_search_tool" style="padding:3px">
     <span>轮次:</span>
-    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_answer_score" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_answer_score"
+            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
     <a href="#" class="easyui-linkbutton" plain="true" onclick="doAnswerScoreSearch()">
         <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chaxun"></use>
@@ -53,7 +56,8 @@
 </div>
 <div id="subject_score_search_tool" style="padding:3px">
     <span>轮次:</span>
-    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_subject_score" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_subject_score"
+            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
     <a href="#" class="easyui-linkbutton" plain="true" onclick="doSubjectScoreSearch()">
         <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chaxun"></use>
@@ -63,48 +67,94 @@
 </div>
 <div id="good_subject_search_tool" style="padding:3px">
     <span>轮次:</span>
-    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_good_subject" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_good_subject"
+            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
     <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
         <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chaxun"></use>
         </svg>
         查询
     </a>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doExportGood()">
         <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-export"></use>
         </svg>
         导出
     </a>
 </div>
-<div id="all_subject_search_tool" style="padding:3px">
-    <span>轮次:</span>
-    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_all_subject" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doAllSubjectSearch()">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chaxun"></use>
-        </svg>
-        查询
-    </a>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-export"></use>
-        </svg>
-        导出
-    </a>
+<div id="all_subject_search_tool" >
+    <form action="" method="post">
+        <span>轮次:</span>
+        <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_all_subject" name="roundNo" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="doAllSubjectSearch()">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-chaxun"></use>
+            </svg>
+            查询
+        </a>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="doExportAll()">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出
+        </a>
+    </form>
 </div>
 <div id="win" class="easyui-window" closed="true" title="详情页面" style="width: 95%;height: 88%;">
     <table id="score_detail_table" style="width: 100%"></table>
     <table id="subject_detail_table" style="width: 100%"></table>
+</div>
+
+<div id="export-window" class="easyui-window" closed="true" title="导出条件" style="width: 500px;height: 188px;">
+    <form id="export_subject_form" action="/export/exportSubject" method="post">
+        <table>
+            <input type="text" name="tabs" id="tabs" hidden/>
+            <tr>
+                <td>轮次:</td>
+                <td>
+                    <select class="easyui-combotree" url="/agenda/getAllAgenda" name="roundNo" id="roundNo_all_subject_export"
+                            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>导出范围:</td>
+                <td>
+                    <span class="radioSpan">
+                        <input type="radio" name="fanwei" value="1" checked>导出本轮全部</input>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>文本类型:</td>
+                <td>
+                    <span class="radioSpan">
+                        <input type="radio" name="type" value="0" checked>导出到txt</input>
+                        <input type="radio" name="type" value="1">导出到Excel</input>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-export"></use>
+                        </svg>
+                        导出
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 <%--本轮得分榜--%>
 <script type="text/javascript">
     var firstSubWinWidth;
     var secondSubWinWidth;
-    var flag=0;
+    var flag = 0;
     $('#this_score_table').datagrid({
-        fit:true, //自适应高度
+        fit: true, //自适应高度
         singleSelect: true,
         idField: 'user_id',
         url: '/answer/getScoreInfo',
@@ -113,30 +163,31 @@
         nowrap: false,
         pageList: [10, 20, 50, 100],
         frozenColumns: [[
-            {field: 'user_name', title: '用户名', width: setWidth(24),
+            {
+                field: 'user_name', title: '用户名', width: setWidth(24),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
             }
         ]],
         columns: [[
-            {field: 'user_id', title: '用户ID',fixed: 'left', hidden: true}
-            ,{field: 'sumScore', sortable: true, title: '总积分', width: setWidth(25)}
-            ,{field: 'userAnsScore', sortable: true, title: '猜射得分', width: setWidth(25)}
-            ,{field: 'userSubScore', sortable: true, title: '制谜得分', width: setWidth(25)}
+            {field: 'user_id', title: '用户ID', fixed: 'left', hidden: true}
+            , {field: 'sumScore', sortable: true, title: '总积分', width: setWidth(25)}
+            , {field: 'userAnsScore', sortable: true, title: '猜射得分', width: setWidth(25)}
+            , {field: 'userSubScore', sortable: true, title: '制谜得分', width: setWidth(25)}
         ]],
-        onClickCell: function(index,field,value){
-            if(field == 'user_name'){
-                var row =$('#this_score_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
+        onClickCell: function (index, field, value) {
+            if (field == 'user_name') {
+                var row = $('#this_score_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
                 $('#win').window('open');
                 $('#score_detail_table').datagrid({
-                    title:'得分情况',
+                    title: '得分情况',
                     // fit:true, //自适应高度
                     // height: 200,
                     singleSelect: true,
                     idField: 'user_id',
                     nowrap: false,
-                    url: '/util/userScoreDetailTable?userId='+ row.userId,
+                    url: '/util/userScoreDetailTable?userId=' + row.userId,
                     rownumbers: true,
                     pagination: false,
                     columns: [[
@@ -147,12 +198,12 @@
                     ]]
                 });
                 $('#subject_detail_table').datagrid({
-                    title:'单条谜题得分情况',
+                    title: '单条谜题得分情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
                     idField: 'dm_id',
                     nowrap: false,
-                    url: '/util/userCompetitionDetail?userId='+row.userId + '&roundNo=' + row.agendaRoundNo, //数据接口
+                    url: '/util/userCompetitionDetail?userId=' + row.userId + '&roundNo=' + row.agendaRoundNo, //数据接口
                     rownumbers: true,
                     pagination: true,
                     pageList: [10, 20, 50, 100],
@@ -161,13 +212,13 @@
                     ]],
                     columns: [[
                         {field: 'dm_id', title: 'ID', hidden: true}
-                        ,{field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(15)}
-                        ,{field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(17)}
-                        ,{field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
-                        ,{field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
-                        ,{field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(5)}
-                        ,{field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(5)}
-                        ,{field: 'rownum', title: '名次', width: setSecondSubWinWidth(5)}
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(17)}
+                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(5)}
+                        , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(5)}
+                        , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(5)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -184,16 +235,16 @@
     });
 
     $('#win').window({
-        collapsible:false,
-        minimizable:false
+        collapsible: false,
+        minimizable: false
     });
 
-    function setWidth(percent){
+    function setWidth(percent) {
         return $("#this_score_table").width() * percent / 100;
     }
 
-    function setSubWinWidth(percent){
-        if(flag == 0){
+    function setSubWinWidth(percent) {
+        if (flag == 0) {
             firstSubWinWidth = $("#score_detail_table").width();
             secondSubWinWidth = $("#subject_detail_table").width();
         }
@@ -201,8 +252,8 @@
         return firstSubWinWidth * percent / 100;
     }
 
-    function setSecondSubWinWidth(percent){
-        if(flag == 0){
+    function setSecondSubWinWidth(percent) {
+        if (flag == 0) {
             firstSubWinWidth = $("#score_detail_table").width();
             secondSubWinWidth = $("#subject_detail_table").width();
         }
@@ -229,7 +280,7 @@
 <%--总积分榜--%>
 <script type="text/javascript">
     $('#his_score_table').datagrid({
-        fit:true, //自适应高度
+        fit: true, //自适应高度
         singleSelect: true,
         nowrap: false,
         idField: 'user_id',
@@ -252,7 +303,7 @@
         ]]
     });
 
-    function setWidth(percent){
+    function setWidth(percent) {
         return $("#his_score_table").width() * percent / 100;
     }
 
@@ -269,7 +320,7 @@
 <%--猜射积分榜--%>
 <script type="text/javascript">
     $('#answer_score_table').datagrid({
-        fit:true, //自适应高度
+        fit: true, //自适应高度
         singleSelect: true,
         idField: 'user_id',
         nowrap: false,
@@ -279,25 +330,26 @@
         pageList: [10, 20, 50, 100],
         columns: [[
             {field: 'user_id', title: '用户ID', align: 'center', hidden: true}
-            , {field: 'user_name', title: '用户名',fixed: 'left',width: setWidth(49),
+            , {
+                field: 'user_name', title: '用户名', fixed: 'left', width: setWidth(49),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-            , {field: 'userAnsScore', sortable: true, title: '猜射得分',width: setWidth(50)}
+            , {field: 'userAnsScore', sortable: true, title: '猜射得分', width: setWidth(50)}
         ]],
-        onClickCell: function(index,field,value){
-            if(field == 'user_name'){
-                var row =$('#answer_score_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
+        onClickCell: function (index, field, value) {
+            if (field == 'user_name') {
+                var row = $('#answer_score_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
                 $('#win').window('open');
                 $('#score_detail_table').datagrid({
-                    title:'得分情况',
+                    title: '得分情况',
                     // fit:true, //自适应高度
                     // height: 200,
                     singleSelect: true,
                     idField: 'user_id',
                     nowrap: false,
-                    url: '/util/userScoreDetailTable?userId='+ row.userId,
+                    url: '/util/userScoreDetailTable?userId=' + row.userId,
                     rownumbers: true,
                     pagination: false,
                     columns: [[
@@ -309,12 +361,12 @@
                 });
                 var userName = row.user_name;
                 $('#subject_detail_table').datagrid({
-                    title:'猜射情况',
+                    title: '猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
                     idField: 'dm_id',
                     nowrap: false,
-                    url: '/util/userAnswerDetailTable?userId='+row.userId + '&roundNo=' + row.agendaRoundNo, //数据接口
+                    url: '/util/userAnswerDetailTable?userId=' + row.userId + '&roundNo=' + row.agendaRoundNo, //数据接口
                     rownumbers: true,
                     pagination: true,
                     pageList: [10, 20, 50, 100],
@@ -323,13 +375,13 @@
                     ]],
                     columns: [[
                         {field: 'dm_id', title: 'ID', hidden: true}
-                        ,{field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
-                        ,{field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
-                        ,{field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(12)}
-                        ,{field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(12)}
-                        ,{field: 'dm_author_name', title: '作者', width: setSecondSubWinWidth(8)}
-                        ,{field: 'user_answer', title: userName+'猜射', width: setSecondSubWinWidth(15)}
-                        ,{field: 'user_answer_score', title: '猜射得分', width: setSecondSubWinWidth(5)}
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
+                        , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(12)}
+                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(12)}
+                        , {field: 'dm_author_name', title: '作者', width: setSecondSubWinWidth(8)}
+                        , {field: 'user_answer', title: userName + '猜射', width: setSecondSubWinWidth(15)}
+                        , {field: 'user_answer_score', title: '猜射得分', width: setSecondSubWinWidth(5)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -345,7 +397,7 @@
         }
     });
 
-    function setWidth(percent){
+    function setWidth(percent) {
         return $("#answer_score_table").width() * percent / 100;
     }
 
@@ -368,7 +420,7 @@
 <%--制谜积分榜--%>
 <script type="text/javascript">
     $('#subject_score_table').datagrid({
-        fit:true, //自适应高度
+        fit: true, //自适应高度
         singleSelect: true,
         idField: 'user_id',
         nowrap: false,
@@ -378,26 +430,27 @@
         pageList: [10, 20, 50, 100],
         columns: [[
             {field: 'user_id', title: '用户ID', align: 'center', hidden: true}
-            , {field: 'user_name', title: '用户名',fixed: 'left',width: setWidth(49),
+            , {
+                field: 'user_name', title: '用户名', fixed: 'left', width: setWidth(49),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-            , {field: 'userSubScore', sortable: true, title: '制谜得分',width: setWidth(50)}
+            , {field: 'userSubScore', sortable: true, title: '制谜得分', width: setWidth(50)}
         ]],
-        onClickCell: function(index,field,value){
-            if(field == 'user_name'){
-                var row =$('#subject_score_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
-                console.log('row',row);
+        onClickCell: function (index, field, value) {
+            if (field == 'user_name') {
+                var row = $('#subject_score_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
+                console.log('row', row);
                 $('#win').window('open');
                 $('#score_detail_table').datagrid({
-                    title:'得分情况',
+                    title: '得分情况',
                     // fit:true, //自适应高度
                     // height: 200,
                     singleSelect: true,
                     idField: 'user_id',
                     nowrap: false,
-                    url: '/util/userScoreDetailTable?userId='+ row.userId,
+                    url: '/util/userScoreDetailTable?userId=' + row.userId,
                     rownumbers: true,
                     pagination: false,
                     columns: [[
@@ -408,12 +461,12 @@
                     ]]
                 });
                 $('#subject_detail_table').datagrid({
-                    title:'猜射情况',
+                    title: '猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
                     idField: 'dm_id',
                     nowrap: false,
-                    url: '/util/userCompetitionDetail?userId='+row.userId + '&roundNo=' + row.agendaRoundNo, //数据接口
+                    url: '/util/userCompetitionDetail?userId=' + row.userId + '&roundNo=' + row.agendaRoundNo, //数据接口
                     rownumbers: true,
                     pagination: true,
                     pageList: [10, 20, 50, 100],
@@ -422,13 +475,13 @@
                     ]],
                     columns: [[
                         {field: 'dm_id', title: 'ID', hidden: true}
-                        ,{field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
-                        ,{field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
-                        ,{field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
-                        ,{field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
-                        ,{field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(8)}
-                        ,{field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(8)}
-                        ,{field: 'rownum', title: '名次', width: setSecondSubWinWidth(8)}
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
+                        , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(8)}
+                        , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(8)}
+                        , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(8)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -444,7 +497,7 @@
         }
     });
 
-    function setWidth(percent){
+    function setWidth(percent) {
         return $("#subject_score_table").width() * percent / 100;
     }
 
@@ -467,7 +520,7 @@
 <%--佳谜榜--%>
 <script type="text/javascript">
     $('#good_subject_table').datagrid({
-        fit:true, //自适应高度
+        fit: true, //自适应高度
         singleSelect: true,
         nowrap: false,
         idField: 'dm_temp_id',
@@ -476,7 +529,8 @@
         pagination: false,
         pageList: [10, 20, 50, 100],
         frozenColumns: [[
-            {field: 'dm_mimian', title: '谜面', width: setWidth(19),
+            {
+                field: 'dm_mimian', title: '谜面', width: setWidth(19),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
@@ -484,19 +538,19 @@
         ]],
         columns: [[
             {field: 'dm_temp_id', title: 'ID', hidden: true}
-            ,{field: 'dm_mimu', title: '谜目', width: setWidth(12)}
-            ,{field: 'dm_midi', title: '谜底', width: setWidth(18)}
-            ,{field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
-            ,{field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
-            ,{field: 'user_name', title: '作者', width: setWidth(6)}
-            ,{field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
+            , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
+            , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
+            , {field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
+            , {field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
+            , {field: 'user_name', title: '作者', width: setWidth(6)}
+            , {field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
         ]],
-        onClickCell: function(index,field,value){
-            if(field == 'dm_mimian'){
-                var row =$('#good_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
+        onClickCell: function (index, field, value) {
+            if (field == 'dm_mimian') {
+                var row = $('#good_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
                 $('#win').window('open');
                 $('#score_detail_table').datagrid({
-                    title:'谜题详情',
+                    title: '谜题详情',
                     // fit:true, //自适应高度
                     // height: 200,
                     singleSelect: true,
@@ -510,20 +564,20 @@
                     ]],
                     columns: [[
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
-                        ,{field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
-                        ,{field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        ,{field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
-                        ,{field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
-                        ,{field: 'user_name', title: '作者', width: setSubWinWidth(12)}
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
+                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
+                        , {field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
+                        , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid({
-                    title:'用户猜射情况',
+                    title: '用户猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
                     idField: 'dm_id',
                     nowrap: false,
-                    url: '/util/dengmiAnswerDetailTable?dmId='+row.dm_temp_id, //数据接口
+                    url: '/util/dengmiAnswerDetailTable?dmId=' + row.dm_temp_id, //数据接口
                     rownumbers: true,
                     pagination: true,
                     pageList: [10, 20, 50, 100],
@@ -532,10 +586,10 @@
                     ]],
                     columns: [[
                         {field: 'userId', title: '用户ID', hidden: true}
-                        ,{field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
-                        ,{field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
-                        ,{field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
-                        ,{field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
+                        , {field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -551,7 +605,7 @@
         }
     });
 
-    function setWidth(percent){
+    function setWidth(percent) {
         return $("#good_subject_table").width() * percent / 100;
     }
 
@@ -560,6 +614,12 @@
             roundNo: $('#roundNo_good_subject').combobox("getValue")
         });
     }
+
+    function doExportGood() {
+        $('#export-window').window('open');
+        $("#tabs").val('goodSubject');
+    }
+
 
     $('#good_subject_table').datagrid('getPager').pagination({
         // showPageList:true,
@@ -574,7 +634,7 @@
 <%--全部谜题--%>
 <script type="text/javascript">
     $('#all_subject_table').datagrid({
-        fit:true, //自适应高度
+        fit: true, //自适应高度
         singleSelect: true,
         idField: 'dm_temp_id',
         nowrap: false,
@@ -583,7 +643,8 @@
         pagination: true,
         pageList: [10, 20, 50, 100],
         frozenColumns: [[
-            {field: 'dm_mimian', title: '谜面', width: setWidth(19),
+            {
+                field: 'dm_mimian', title: '谜面', width: setWidth(19),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
@@ -591,19 +652,19 @@
         ]],
         columns: [[
             {field: 'dm_temp_id', title: 'ID', hidden: true}
-            ,{field: 'dm_mimu', title: '谜目', width: setWidth(12)}
-            ,{field: 'dm_midi', title: '谜底', width: setWidth(18)}
-            ,{field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
-            ,{field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
-            ,{field: 'user_name', title: '作者', width: setWidth(6)}
-            ,{field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
+            , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
+            , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
+            , {field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
+            , {field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
+            , {field: 'user_name', title: '作者', width: setWidth(6)}
+            , {field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
         ]],
-        onClickCell: function(index,field,value){
-            if(field == 'dm_mimian'){
-                var row =$('#all_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
+        onClickCell: function (index, field, value) {
+            if (field == 'dm_mimian') {
+                var row = $('#all_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
                 $('#win').window('open');
                 $('#score_detail_table').datagrid({
-                    title:'谜题详情',
+                    title: '谜题详情',
                     // fit:true, //自适应高度
                     // height: 200,
                     singleSelect: true,
@@ -617,20 +678,20 @@
                     ]],
                     columns: [[
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
-                        ,{field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
-                        ,{field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        ,{field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
-                        ,{field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
-                        ,{field: 'user_name', title: '作者', width: setSubWinWidth(12)}
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
+                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
+                        , {field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
+                        , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid({
-                    title:'用户猜射情况',
+                    title: '用户猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
                     idField: 'dm_id',
                     nowrap: false,
-                    url: '/util/dengmiAnswerDetailTable?dmId='+row.dm_temp_id, //数据接口
+                    url: '/util/dengmiAnswerDetailTable?dmId=' + row.dm_temp_id, //数据接口
                     rownumbers: true,
                     pagination: true,
                     pageList: [10, 20, 50, 100],
@@ -639,10 +700,10 @@
                     ]],
                     columns: [[
                         {field: 'userId', title: '用户ID', hidden: true}
-                        ,{field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
-                        ,{field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
-                        ,{field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
-                        ,{field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
+                        , {field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -658,7 +719,7 @@
         }
     });
 
-    function setWidth(percent){
+    function setWidth(percent) {
         return $("#all_subject_table").width() * percent / 100;
     }
 
@@ -667,6 +728,17 @@
             roundNo: $('#roundNo_all_subject').combobox("getValue")
         });
     }
+
+    function doExportAll() {
+        $('#export-window').window('open');
+        $("#tabs").val('allSubject');
+    }
+
+    $('#export-window').window({
+        collapsible: false,
+        minimizable: false
+    });
+
 
     $('#all_subject_table').datagrid('getPager').pagination({
         // showPageList:true,
@@ -679,8 +751,8 @@
     });
 </script>
 <style type="text/css">
-    super-link{
-        cursor:pointer;
+    super-link {
+        cursor: pointer;
     }
 </style>
 </html>
