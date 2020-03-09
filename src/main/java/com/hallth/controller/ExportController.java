@@ -2,6 +2,8 @@ package com.hallth.controller;
 
 import com.hallth.domain.DengmiQueryBean;
 import com.hallth.domain.ExportBean;
+import com.hallth.domain.MytyAgenda;
+import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyDengmiTempServiceImpl;
 import com.hallth.utils.ExportUtils;
 import org.apache.log4j.Logger;
@@ -30,7 +32,6 @@ public class ExportController {
     private MytyDengmiTempServiceImpl dengmiTempService;
     @Resource
     private ExportUtils exportUtils;
-
 
     @RequestMapping(value = "/exportSubject", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> getSubjectScoreInfo( ExportBean param, HttpServletResponse response, HttpServletRequest request) {
@@ -82,7 +83,7 @@ public class ExportController {
             result_map.put("msg", "导出文件成功！");
         } catch (Exception e){
             result_map.put("result", false);
-            result_map.put("msg", "导出失败！");
+            result_map.put("msg", "导出失败！"+e.getMessage());
         }
         return result_map;
     }

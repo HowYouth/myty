@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/js/myjs.js"></script>
+    <%--<script type="text/javascript" src="/js/jquery.form.js"></script>--%>
     <script src="/font/iconfont.js"></script>
 </head>
 <body>
@@ -66,24 +67,34 @@
     </a>
 </div>
 <div id="good_subject_search_tool" style="padding:3px">
-    <span>轮次:</span>
-    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_good_subject"
-            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chaxun"></use>
-        </svg>
-        查询
-    </a>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doExportGood()">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-export"></use>
-        </svg>
-        导出
-    </a>
+    <form action="/export/exportSubject" id="export-form-good" method="post">
+        <span>轮次:</span>
+        <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_good_subject" name="roundNo" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-chaxun"></use>
+            </svg>
+            查询
+        </a>
+        <input name="tabs" value="goodSubject" hidden/>
+        <input name="fanwei" value="1" hidden/>
+        <input name="type"  hidden id="type2"/>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(1,0)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为Excel
+        </a>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(0,0)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为txt
+        </a>
+    </form>
 </div>
 <div id="all_subject_search_tool" >
-    <form action="" method="post">
+    <form action="/export/exportSubject" id="export-form-all" method="post">
         <span>轮次:</span>
         <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_all_subject" name="roundNo" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
         <a href="#" class="easyui-linkbutton" plain="true" onclick="doAllSubjectSearch()">
@@ -92,11 +103,20 @@
             </svg>
             查询
         </a>
-        <a href="#" class="easyui-linkbutton" plain="true" onclick="doExportAll()">
+        <input name="tabs" value="allSubject" hidden/>
+        <input name="fanwei" value="1" hidden/>
+        <input name="type"  hidden id="type"/>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(1,1)">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-export"></use>
             </svg>
-            导出
+            导出为Excel
+        </a>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(0,1)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为txt
         </a>
     </form>
 </div>
@@ -104,50 +124,29 @@
     <table id="score_detail_table" style="width: 100%"></table>
     <table id="subject_detail_table" style="width: 100%"></table>
 </div>
-
-<div id="export-window" class="easyui-window" closed="true" title="导出条件" style="width: 500px;height: 188px;">
-    <form id="export_subject_form" action="/export/exportSubject" method="post">
-        <table>
-            <input type="text" name="tabs" id="tabs" hidden/>
-            <tr>
-                <td>轮次:</td>
-                <td>
-                    <select class="easyui-combotree" url="/agenda/getAllAgenda" name="roundNo" id="roundNo_all_subject_export"
-                            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>导出范围:</td>
-                <td>
-                    <span class="radioSpan">
-                        <input type="radio" name="fanwei" value="1" checked>导出本轮全部</input>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>文本类型:</td>
-                <td>
-                    <span class="radioSpan">
-                        <input type="radio" name="type" value="0" checked>导出到txt</input>
-                        <input type="radio" name="type" value="1">导出到Excel</input>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <button type="submit">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-export"></use>
-                        </svg>
-                        导出
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
 </body>
+<script type="text/javascript">
+    function submitExportForm(param, tabs){
+        debugger;
+        var roundNo = '';
+        var form_id = '';
+        if(tabs == 1){//全部谜题
+            roundNo = $('#roundNo_all_subject').combobox("getValue");
+            $('#type').val(param);
+            form_id = 'export-form-all';
+        } else {
+            roundNo = $('#roundNo_good_subject').combobox("getValue");
+            $('#type2').val(param);
+            form_id = 'export-form-good';
+        }
+        console.log(roundNo);
+        if(roundNo == null || roundNo == ""){
+            $.messager.alert('提示','请选择轮次');
+            return;
+        }
+        $('#'+form_id).submit();
+    }
+</script>
 <%--本轮得分榜--%>
 <script type="text/javascript">
     var firstSubWinWidth;
@@ -615,12 +614,6 @@
         });
     }
 
-    function doExportGood() {
-        $('#export-window').window('open');
-        $("#tabs").val('goodSubject');
-    }
-
-
     $('#good_subject_table').datagrid('getPager').pagination({
         // showPageList:true,
         beforePageText: '第',//页数文本框前显示的汉字
@@ -728,17 +721,6 @@
             roundNo: $('#roundNo_all_subject').combobox("getValue")
         });
     }
-
-    function doExportAll() {
-        $('#export-window').window('open');
-        $("#tabs").val('allSubject');
-    }
-
-    $('#export-window').window({
-        collapsible: false,
-        minimizable: false
-    });
-
 
     $('#all_subject_table').datagrid('getPager').pagination({
         // showPageList:true,
