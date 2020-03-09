@@ -35,11 +35,12 @@ public class MytyDengmiTempController {
     public Map<String, Object> toMySubject(HttpServletRequest request, Model model) {
         logger.info("查询灯谜信息，param");
         int currentPage = Integer.parseInt(request.getParameter("page"));
-        int pageSize = Integer.parseInt(request.getParameter("limit"));
+//        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int pageSize = Integer.parseInt(request.getParameter("rows"));
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
         MytyAgenda agenda = agendaService.getNewAgenda();
-        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(), loginUserId, currentPage, pageSize);
+        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(), loginUserId, currentPage, pageSize, false);
         return map;
     }
 
@@ -60,7 +61,7 @@ public class MytyDengmiTempController {
         int inputCount = agenda.getInputCount();
         MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(),loginUserId, 1, Integer.MAX_VALUE);
+        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(),loginUserId, 1, Integer.MAX_VALUE, true);
         List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
         if(list == null || list.size() == 0){
             for(int i = 0; i < inputCount; i ++){

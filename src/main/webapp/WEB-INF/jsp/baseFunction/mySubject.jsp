@@ -10,89 +10,90 @@
 <html>
 <head>
     <title>谜苑天涯-我的谜题</title>
-    <link rel="stylesheet" href="/layui/css/layui.css"/>
-    <link rel="stylesheet" href="/css/myty.css"/>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.pure.tooltips.js"></script>
-    <script type="text/javascript" src="/js/myty.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+    <link rel="stylesheet" href="/font/iconfont.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/myjs.js"></script>
+    <script src="/font/iconfont.js"></script>
 </head>
 <body>
-<%--<div class="layui-row">--%>
-    <%--<div class="borderColor loginDiv height-auto">--%>
-        <%--<table class="layui-table">--%>
-            <%--<tr>--%>
-                <%--<th lay-data="{align:'center'}" colspan="5">本轮我输入的谜题</th>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<th><span>谜面</span></th>--%>
-                <%--<th><span>谜目</span></th>--%>
-                <%--<th><span>谜底</span></th>--%>
-                <%--<th><span>谜面注解</span></th>--%>
-                <%--<th><span>谜底注解</span></th>--%>
-            <%--</tr>--%>
-            <%--&lt;%&ndash;<c:if test="${empty list}">&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<tr>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<td>本轮没有输入谜题</td>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</tr>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<c:otherwise>&ndash;%&gt;--%>
-            <%--<c:forEach items="${data.list}" var="item" varStatus="status">--%>
-                <%--<tr class="${status.index%2 == 0 ? 'cell-background-color-0' : 'cell-background-color-1'}">--%>
-                    <%--<td>${item.dmMimian}</td>--%>
-                    <%--<td>${item.dmMimu}</td>--%>
-                    <%--<td>${item.dmMidi}</td>--%>
-                    <%--<td>${item.dmMimianzhu}</td>--%>
-                    <%--<td>${item.dmMidizhu}</td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-            <%--&lt;%&ndash;</c:otherwise>&ndash;%&gt;--%>
-        <%--</table>--%>
-        <%--<div class="layui-btn-container">--%>
-            <%--共${data.total}条 当前${data.currentPage}/${data.pageCount}页--%>
-            <%--<button type="button" class="layui-btn">--%>
-                <%--<span><a href="javascript:getMySubjects('${data.pageSize}', 1)">首页</a></span>--%>
-            <%--</button>--%>
-            <%--<c:if test="${data.currentPage > 1}">--%>
-                <%--<button type="button" class="layui-btn">--%>
-                    <%--<span><a href="javascript:getMySubjects('${data.pageSize}', '${data.currentPage - 1}')">上一页</a></span>--%>
-                <%--</button>--%>
-            <%--</c:if>--%>
-            <%--<c:if test="${data.currentPage < data.pageCount}">--%>
-                <%--<button type="button" class="layui-btn">--%>
-                    <%--<span><a href="javascript:getMySubjects('${data.pageSize}', '${data.currentPage + 1}')">下一页</a></span>--%>
-                <%--</button>--%>
-            <%--</c:if>--%>
-            <%--<button type="button" class="layui-btn">--%>
-                <%--<span><a href="javascript:getMySubjects('${data.pageSize}', '${data.pageCount}')">尾页</a></span>--%>
-            <%--</button>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
-<%--<jsp:include page="../frame/bottom.jsp"></jsp:include>--%>
-<div style="padding: 15px;">
-    <table id="demo" lay-filter="test"></table>
+<div style="padding: 15px; width: 100%; height: 100%;">
+    <table id="my_subject_table" toolbar="#my_subject_search_tool" style="width: 100%"></table>
+</div>
+<div id="my_subject_search_tool" >
+    <form action="/export/exportSubject" id="export-form-mySubject" method="post">
+        <input name="roundNo" value="${roundNo}" hidden/>
+        <input name="tabs" value="mySubject" hidden/>
+        <input name="fanwei" value="1" hidden/>
+        <input name="type"  hidden id="type"/>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(1)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为Excel
+        </a>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(0)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为txt
+        </a>
+    </form>
 </div>
 </body>
-<script>
-    layui.use('table', function(){
-        var table = layui.table;
+<script type="text/javascript">
+    function submitExportForm(param){
+        $('#type').val(param);
+        $('#export-form-mySubject').submit();
+    }
 
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            ,url: '/dengmiTemp/toMySubject' //数据接口
-            ,page: true //开启分页
-            ,limits: [5,10,20,50]
-            ,limit: 10
-            ,cols: [[ //表头
-                {field: 'dmMimian', title: '谜面', width: 500, fixed: 'left'}
-                ,{field: 'dmMimu', title: '谜目'}
-                ,{field: 'dmMidi', title: '谜底'}
-                ,{field: 'dmMimianzhu', title: '谜面注解'}
-                ,{field: 'dmMidizhu', title: '谜底注解'}
-            ]]
+    $('#my_subject_table').datagrid({
+        fit: true, //自适应高度
+        singleSelect: true,
+        idField: 'dmTempId',
+        url: '/dengmiTemp/toMySubject',
+        rownumbers: true,
+        pagination: true,
+        nowrap: false,
+        pageList: [10, 20, 50, 100],
+        frozenColumns: [[
+            {field: 'dmMimian', title: '谜面', width: setWidth(20)}
+        ]],
+        columns: [[
+            {field: 'dmTempId', title: 'ID', hidden: true}
+            ,{field: 'dmMimu', title: '谜目', width: setWidth(18)}
+            ,{field: 'dmMidi', title: '谜底', width: setWidth(20)}
+            ,{field: 'dmMimianzhu', title: '注解', width: setWidth(40),
+                formatter: function (value, rec, index) {
+                    console.log(rec);
+                    console.log(index);
+                    return (rec.dmMimianzhu == null ? "" : rec.dmMimianzhu) + (rec.dmMidizhu == null ? "" : rec.dmMidizhu);
+                }
+            }
+        ]]
+    });
+
+    function doSearch() {
+        $('#my_subject_table').datagrid('load', {
+            roundNo: $('#roundNo_my_subject').combobox("getValue")
         });
+    }
+
+    function setWidth(percent) {
+        return $("#my_subject_table").width() * percent / 100;
+    }
+
+    $('#my_subject_table').datagrid('getPager').pagination({
+        // showPageList:true,
+        beforePageText: '第',//页数文本框前显示的汉字
+        afterPageText: '页    共 {pages} 页',
+        displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+        onBeforeRefresh: function () {
+            return true;
+        }
     });
 </script>
 </html>

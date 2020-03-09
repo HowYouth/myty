@@ -45,7 +45,7 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
     }
 
     @Override
-    public Map<String, Object> selectByUserIdPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize) {
+    public Map<String, Object> selectByUserIdPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize, boolean flag) {
         MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
         dengmiTemp.setDmAuthor(loginUserId);
         dengmiTemp.setPageSize(pageSize);
@@ -55,18 +55,23 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         int total = dengmiTempMapper.selectByUserIdPageQueryCount(dengmiTemp);
         MytyAgenda agenda = agendaService.getNewAgenda();
         int inputCount = agenda.getInputCount();
-        if(list == null || list.size() < inputCount){
-            int addNull = inputCount - list.size();
-            for(int i = 0; i < addNull; i ++){
-                MytyDengmiTemp dengmi = createDengmiTemp();
-                list.add(dengmi);
+        if(flag){
+            if(list == null || list.size() < inputCount){
+                int addNull = inputCount - list.size();
+                for(int i = 0; i < addNull; i ++){
+                    MytyDengmiTemp dengmi = createDengmiTemp();
+                    list.add(dengmi);
+                }
             }
         }
+
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",total);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",total);
         map.put("data",list);
+        map.put("total",total);
+        map.put("rows",list);
         return map;
     }
 

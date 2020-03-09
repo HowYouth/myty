@@ -1,8 +1,6 @@
 package com.hallth.controller;
 
-import com.hallth.domain.DengmiQueryBean;
-import com.hallth.domain.ExportBean;
-import com.hallth.domain.MytyAgenda;
+import com.hallth.domain.*;
 import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyDengmiTempServiceImpl;
 import com.hallth.utils.ExportUtils;
@@ -64,7 +62,12 @@ public class ExportController {
             } else if(tabs.equals("inputAnswer")){//输入猜射
 
             } else if(tabs.equals("mySubject")){//我的谜题
-
+                sheetNames[0] = "第" + roundNo + "轮我的谜题";
+                titles[0] = "谜苑天涯内赛第" + roundNo + "轮我的谜题";
+                MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
+                String loginUserId = userInfo.getUserId();
+                map = dengmiTempService.selectByUserIdPageQuery(Integer.parseInt(roundNo), loginUserId, currentPage, pageSize, false);
+                map = formatData(map);
             }
             List<DengmiQueryBean> list = (List<DengmiQueryBean>)map.get("rows");
             String file_suffix = "";
@@ -86,6 +89,25 @@ public class ExportController {
             result_map.put("msg", "导出失败！"+e.getMessage());
         }
         return result_map;
+    }
+
+    private Map formatData(Map map){
+        Map returnMap = new HashMap();
+        List<MytyDengmiTemp> list1 = (List<MytyDengmiTemp>)map.get("rows");
+        List<DengmiQueryBean> list = new ArrayList<>();
+        for(MytyDengmiTemp item : list1){
+            DengmiQueryBean bean = new DengmiQueryBean();
+            bean.setDm_temp_id(item.getDmTempId());
+            bean.setDm_mimian(item.getDmMimian());
+            bean.setDm_mimu(item.getDmMimu());
+            bean.setDm_midi(item.getDmMidi());
+            bean.setDm_mimianzhu(item.getDmMimianzhu());
+            bean.setDm_midizhu(item.getDmMidizhu());
+            bean.setUser_name(item.getDmAuthor());
+            list.add(bean);
+        }
+        returnMap.put("rows", list);
+        return  returnMap;
     }
 
     private void exportExcel(XSSFWorkbook wb, HttpServletResponse response, String fileName, String fileSuffix){

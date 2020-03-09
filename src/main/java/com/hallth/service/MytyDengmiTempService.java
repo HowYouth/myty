@@ -11,7 +11,7 @@ public interface MytyDengmiTempService {
 
     List<MytyDengmiTemp> selectNoAnswers(String loginUserId);
 
-    Map<String, Object> selectByUserIdPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize);
+    Map<String, Object> selectByUserIdPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize, boolean flag);
 
     Map<String, Object> selectNoAnswersPageQuery(int roundNo, String loginUserId, int currentPage, int pageSize);
 
