@@ -29,7 +29,7 @@ public interface MytyDengmiTempMapper {
     int selectByUserIdPageQueryCount(MytyDengmiTemp dengmiTemp);
 
 
-    List<MytyDengmiTemp> selectNoAnswersPageQuery(MytyDengmiTemp dengmiTemp);
+    List<MytyAnswerQueryBean> selectNoAnswersPageQuery(MytyDengmiTemp dengmiTemp);
 
     int selectNoAnswersPageQueryCount(MytyDengmiTemp dengmiTemp);
 

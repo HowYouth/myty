@@ -47,7 +47,8 @@ public class MytyDengmiTempController {
     @RequestMapping(value = "/noAnswerSubject", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> noAnswerSubject(HttpServletRequest request, Model model) {
         int currentPage = Integer.parseInt(request.getParameter("page"));
-        int pageSize = Integer.parseInt(request.getParameter("limit"));
+//        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int pageSize = Integer.parseInt(request.getParameter("rows"));
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
         MytyAgenda agenda = agendaService.getNewAgenda();
@@ -74,10 +75,12 @@ public class MytyDengmiTempController {
                 list.add(dengmi);
             }
         }
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count", inputCount);
-        map.put("data", list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count", inputCount);
+//        map.put("data", list);
+        map.put("total", inputCount);
+        map.put("rows", list);
         return map;
     }
 
@@ -89,27 +92,34 @@ public class MytyDengmiTempController {
     }
 
     @RequestMapping(value = "/submitMySubject", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> submitMySubject(@RequestParam("dmTempId")int dmTempId, @RequestParam("colName")String colName, @RequestParam("colValue") String colValue, HttpServletRequest request, Model model) {
+    public Map<String, Object> submitMySubject(
+            @RequestParam("dmTempId")String dmTempIds,
+            @RequestParam("dmMimian")String dmMimians,
+            @RequestParam("dmMimu")String dmMimus,
+            @RequestParam("dmMidi")String dmMidis,
+            @RequestParam("dmMimianzhu")String dmMimianzhus,
+            @RequestParam("dmMidizhu")String dmMidizhus,
+            HttpServletRequest request, Model model) {
         logger.info("添加我的谜题,");
         MytyAgenda agenda = agendaService.getNewAgenda();
         Map<String, Object> map = new HashMap<>();
         int inputCount = agenda.getInputCount();
         MytyUser loginUserInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
-        for (int i = 0; i < inputCount; i++) {
+        String[] idArray = dmTempIds.split("\t",-1);
+        String[] mimianArray = dmMimians.split("\t",-1);
+        String[] mimuArray = dmMimus.split("\t",-1);
+        String[] midiArray = dmMidis.split("\t",-1);
+        String[] mimianzhuArray = dmMimianzhus.split("\t",-1);
+        String[] midizhuArray = dmMidizhus.split("\t",-1);
+        for (int i = 0; i < idArray.length-1; i++) {
             MytyDengmiTemp dengmiTemp = new MytyDengmiTemp();
-            if(colName.equals("dmMimian")){
-                dengmiTemp.setDmMimian(colValue);
-            } else if(colName.equals("dmMimu")){
-                dengmiTemp.setDmMimu(colValue);
-            } else if(colName.equals("dmMidi")){
-                dengmiTemp.setDmMidi(colValue);
-            } else if(colName.equals("dmMimianzhu")){
-                dengmiTemp.setDmMimianzhu(colValue);
-            } else if(colName.equals("dmMidizhu")){
-                dengmiTemp.setDmMidizhu(colValue);
-            }
             dengmiTemp.setDmAuthor(loginUserInfo.getUserId());
-            dengmiTemp.setDmTempId(dmTempId);
+            dengmiTemp.setDmTempId(Integer.parseInt(idArray[i]));
+            dengmiTemp.setDmMimian(mimianArray[i]);
+            dengmiTemp.setDmMimu(mimuArray[i]);
+            dengmiTemp.setDmMidi(midiArray[i]);
+            dengmiTemp.setDmMimianzhu(mimianzhuArray[i]);
+            dengmiTemp.setDmMidizhu(midizhuArray[i]);
             dengmiTemp.setAgendaRoundNo(agenda.getRoundNo());
             //是否存在
             MytyDengmiTemp dengmiTemp2 = dengmiTempService.selectDengmiByTempId(dengmiTemp);

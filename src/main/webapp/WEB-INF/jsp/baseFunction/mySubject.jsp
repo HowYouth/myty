@@ -76,12 +76,6 @@
         ]]
     });
 
-    function doSearch() {
-        $('#my_subject_table').datagrid('load', {
-            roundNo: $('#roundNo_my_subject').combobox("getValue")
-        });
-    }
-
     function setWidth(percent) {
         return $("#my_subject_table").width() * percent / 100;
     }

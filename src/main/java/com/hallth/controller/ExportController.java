@@ -50,6 +50,8 @@ public class ExportController {
             }
             String[] sheetNames = new String[1];
             String[] titles = new String[1];
+            MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
+            String loginUserId = userInfo.getUserId();
             Map<String, Object> map = new HashMap<>();
             if(tabs.equals("allSubject")){//全部谜题
                 map = dengmiTempService.getDengmiByRoundNo(Integer.parseInt(roundNo), currentPage, pageSize);
@@ -60,14 +62,15 @@ public class ExportController {
                 sheetNames[0] = "第" + roundNo + "轮佳谜";
                 titles[0] = "谜苑天涯内赛第" + roundNo + "轮佳谜";
             } else if(tabs.equals("inputAnswer")){//输入猜射
-
+                sheetNames[0] = "第" + roundNo + "轮我的猜射";
+                titles[0] = "谜苑天涯内赛第" + roundNo + "轮我的猜射";
+                map = dengmiTempService.selectNoAnswersPageQuery(Integer.parseInt(roundNo), loginUserId, currentPage, pageSize);
+                map = formatData(map,tabs);
             } else if(tabs.equals("mySubject")){//我的谜题
                 sheetNames[0] = "第" + roundNo + "轮我的谜题";
                 titles[0] = "谜苑天涯内赛第" + roundNo + "轮我的谜题";
-                MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
-                String loginUserId = userInfo.getUserId();
                 map = dengmiTempService.selectByUserIdPageQuery(Integer.parseInt(roundNo), loginUserId, currentPage, pageSize, false);
-                map = formatData(map);
+                map = formatData(map,tabs);
             }
             List<DengmiQueryBean> list = (List<DengmiQueryBean>)map.get("rows");
             String file_suffix = "";
@@ -91,22 +94,38 @@ public class ExportController {
         return result_map;
     }
 
-    private Map formatData(Map map){
+    private Map formatData(Map map, String tabs){
         Map returnMap = new HashMap();
-        List<MytyDengmiTemp> list1 = (List<MytyDengmiTemp>)map.get("rows");
         List<DengmiQueryBean> list = new ArrayList<>();
-        for(MytyDengmiTemp item : list1){
-            DengmiQueryBean bean = new DengmiQueryBean();
-            bean.setDm_temp_id(item.getDmTempId());
-            bean.setDm_mimian(item.getDmMimian());
-            bean.setDm_mimu(item.getDmMimu());
-            bean.setDm_midi(item.getDmMidi());
-            bean.setDm_mimianzhu(item.getDmMimianzhu());
-            bean.setDm_midizhu(item.getDmMidizhu());
-            bean.setUser_name(item.getDmAuthor());
-            list.add(bean);
+        if(tabs.equals("mySubject")){
+            List<MytyDengmiTemp> list1 = (List<MytyDengmiTemp>)map.get("rows");
+            for(MytyDengmiTemp item : list1){
+                DengmiQueryBean bean = new DengmiQueryBean();
+                bean.setDm_temp_id(item.getDmTempId());
+                bean.setDm_mimian(item.getDmMimian());
+                bean.setDm_mimu(item.getDmMimu());
+                bean.setDm_midi(item.getDmMidi());
+                bean.setDm_mimianzhu(item.getDmMimianzhu());
+                bean.setDm_midizhu(item.getDmMidizhu());
+                bean.setUser_name(item.getDmAuthor());
+                list.add(bean);
+            }
+            returnMap.put("rows", list);
+        } else if (tabs.equals("inputAnswer")){
+            List<MytyAnswerQueryBean> list1 = (List<MytyAnswerQueryBean>)map.get("rows");
+            for(MytyAnswerQueryBean item : list1){
+                DengmiQueryBean bean = new DengmiQueryBean();
+                bean.setDm_temp_id(item.getDm_temp_id());
+                bean.setDm_mimian(item.getDm_mimian());
+                bean.setDm_mimu(item.getDm_mimu());
+                bean.setDm_midi("");
+                bean.setDm_mimianzhu(item.getDm_mimianzhu());
+                bean.setDm_midizhu(item.getDm_midizhu());
+                bean.setUser_name("");
+                list.add(bean);
+            }
+            returnMap.put("rows", list);
         }
-        returnMap.put("rows", list);
         return  returnMap;
     }
 

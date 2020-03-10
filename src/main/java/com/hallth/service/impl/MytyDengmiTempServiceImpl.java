@@ -90,13 +90,15 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         dengmiTemp.setPageSize(pageSize);
         dengmiTemp.setStartRow(DatabaseUtils.getStartRow(currentPage,pageSize));
         dengmiTemp.setAgendaRoundNo(roundNo);
-        List<MytyDengmiTemp> list = dengmiTempMapper.selectNoAnswersPageQuery(dengmiTemp);
+        List<MytyAnswerQueryBean> list = dengmiTempMapper.selectNoAnswersPageQuery(dengmiTemp);
         int total = dengmiTempMapper.selectNoAnswersPageQueryCount(dengmiTemp);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",total);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",total);
+//        map.put("data",list);
+        map.put("total",total);
+        map.put("rows",list);
         return map;
     }
 

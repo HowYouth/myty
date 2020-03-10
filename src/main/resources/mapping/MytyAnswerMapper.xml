@@ -103,7 +103,7 @@
     <select id="getInputAnswerCounts" parameterType="com.hallth.domain.MytyAgenda" resultType="com.hallth.domain.SaikuangBean">
         select A.user_id, B.user_name, count(A.user_answer) as count from myty_answer A
         left join myty_user B on A.user_id = B.user_id
-        where agenda_round_no = #{roundNo, jdbcType=INTEGER}
+        where agenda_round_no = #{roundNo, jdbcType=INTEGER} and (A.user_answer is not null and A.user_answer != '')
         group by A.user_id HAVING  count(A.user_answer)  > 0
     </select>
 

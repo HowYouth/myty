@@ -213,8 +213,11 @@
                         {field: 'dm_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(15)}
                         , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(17)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(30),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(5)}
                         , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(5)}
                         , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(5)}
@@ -376,8 +379,11 @@
                         {field: 'dm_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
                         , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(12)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(12)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(24),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'dm_author_name', title: '作者', width: setSecondSubWinWidth(8)}
                         , {field: 'user_answer', title: userName + '猜射', width: setSecondSubWinWidth(15)}
                         , {field: 'user_answer_score', title: '猜射得分', width: setSecondSubWinWidth(5)}
@@ -476,8 +482,11 @@
                         {field: 'dm_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
                         , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(28),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(8)}
                         , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(8)}
                         , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(8)}
@@ -539,8 +548,11 @@
             {field: 'dm_temp_id', title: 'ID', hidden: true}
             , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
             , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
-            , {field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
-            , {field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
+            , {field: 'dm_mimianzhu', title: '注解', width: setWidth(38),
+                formatter: function (value, rec, index) {
+                    return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                }
+            }
             , {field: 'user_name', title: '作者', width: setWidth(6)}
             , {field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
         ]],
@@ -565,8 +577,11 @@
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
                         , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth(30),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
                     ]]
                 });
@@ -647,8 +662,11 @@
             {field: 'dm_temp_id', title: 'ID', hidden: true}
             , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
             , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
-            , {field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
-            , {field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
+            , {field: 'dm_mimianzhu', title: '注解', width: setWidth(38),
+                formatter: function (value, rec, index) {
+                    return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                }
+            }
             , {field: 'user_name', title: '作者', width: setWidth(6)}
             , {field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
         ]],
@@ -673,8 +691,11 @@
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
                         , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth(30),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
                     ]]
                 });
@@ -735,6 +756,7 @@
 <style type="text/css">
     super-link {
         cursor: pointer;
+        color: #0000FF;
     }
 </style>
 </html>

@@ -2,6 +2,7 @@ package com.hallth.controller;
 
 import com.hallth.domain.MytyAgenda;
 import com.hallth.domain.MytyAnswer;
+import com.hallth.domain.MytyAnswerQueryBean;
 import com.hallth.domain.MytyUser;
 import com.hallth.service.impl.MytyAgendaServiceImpl;
 import com.hallth.service.impl.MytyAnswerServiceImpl;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,29 +29,66 @@ public class AnswerController {
     private MytyAgendaServiceImpl agendaService;
 
     @RequestMapping(value="/saveMyAnswer", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> saveMyAnswer(@RequestParam("dmTempId")int dmTempId, @RequestParam("dmMidi")String dmMidi, HttpServletRequest request){
+    public Map<String, Object> saveMyAnswer(@RequestParam("dmTempId")String dmTempIds, @RequestParam("dmMidi")String dmMidis, HttpServletRequest request){
         MytyUser loginUser = (MytyUser)request.getSession().getAttribute("loginUserInfo");
         MytyAgenda agenda = agendaService.getNewAgenda();
         Map map = new HashMap();
-        MytyAnswer answer = new MytyAnswer();
-        answer.setDmId(dmTempId);
-        answer.setUserAnswer(dmMidi);
-        answer.setUserId(loginUser.getUserId());
-        answer.setAgendaRoundNo(agenda.getRoundNo());
-        //是否已回答
-        MytyAnswer temp = answerService.getMyAnswer(answer);
 
-        try{
-            if(temp == null){
-                answerService.saveMyAnswer(answer, "I");
-            } else {
-                answerService.saveMyAnswer(answer, "U");
+        String[] idArray = dmTempIds.split("\t",-1);
+        String[] midiArray = dmMidis.split("\t",-1);
+        for(int i = 0; i < idArray.length-1; i ++){
+            MytyAnswer answer = new MytyAnswer();
+            String dmTempId = idArray[i];
+            String dmMidi = midiArray[i];
+            answer.setDmId(Integer.parseInt(dmTempId));
+            answer.setUserAnswer(dmMidi);
+            answer.setUserId(loginUser.getUserId());
+            answer.setAgendaRoundNo(agenda.getRoundNo());
+            //是否已回答
+            MytyAnswer temp = answerService.getMyAnswer(answer);
+
+            try{
+                if(temp == null){
+                    answerService.saveMyAnswer(answer, "I");
+                } else {
+                    answerService.saveMyAnswer(answer, "U");
+                }
+                map.put("result", true);
+                map.put("msg", "操作成功！");
+            } catch (Exception e){
+                map.put("result", false);
+                map.put("msg", "操作失败，请刷新页面重试");
             }
-            map.put("result", true);
-            map.put("msg", "操作成功！");
-        } catch (Exception e){
-            map.put("result", false);
-            map.put("msg", "操作失败，请刷新页面重试");
+        }
+        return  map;
+    }
+
+    @RequestMapping(value="/saveMyAnswerEasyUI", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> saveMyAnswerEasyUI(@RequestParam("list") List<MytyAnswerQueryBean> list, HttpServletRequest request){
+        MytyUser loginUser = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+        Map map = new HashMap();
+        for(MytyAnswerQueryBean item : list){
+            MytyAgenda agenda = agendaService.getNewAgenda();
+            MytyAnswer answer = new MytyAnswer();
+            answer.setDmId(item.getDm_temp_id());
+            answer.setUserAnswer(item.getDm_midi());
+            answer.setUserId(loginUser.getUserId());
+            answer.setAgendaRoundNo(agenda.getRoundNo());
+            //是否已回答
+            MytyAnswer temp = answerService.getMyAnswer(answer);
+
+            try{
+                if(temp == null){
+                    answerService.saveMyAnswer(answer, "I");
+                } else {
+                    answerService.saveMyAnswer(answer, "U");
+                }
+                map.put("result", true);
+                map.put("msg", "操作成功！");
+            } catch (Exception e){
+                map.put("result", false);
+                map.put("msg", "操作失败，请刷新页面重试");
+            }
         }
         return  map;
     }

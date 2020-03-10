@@ -29,12 +29,12 @@ public class PageController {
 
     @RequestMapping(value="/toInputMySubject", method = {RequestMethod.GET, RequestMethod.POST})
     public String toInputMySubject(HttpServletRequest request, Model model){
-        MytyAgenda agenda = agendaService.getNewAgenda();
-        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
-        String loginUserId = userInfo.getUserId();
-        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(), loginUserId, 1, Integer.MAX_VALUE, true);
-        List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
-        model.addAttribute("list", list);
+//        MytyAgenda agenda = agendaService.getNewAgenda();
+//        MytyUser userInfo = (MytyUser)request.getSession().getAttribute("loginUserInfo");
+//        String loginUserId = userInfo.getUserId();
+//        Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(), loginUserId, 1, Integer.MAX_VALUE, true);
+//        List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
+//        model.addAttribute("list", list);
         return "baseFunction/inputMySubject";
     }
 
@@ -91,6 +91,8 @@ public class PageController {
 
     @RequestMapping(value="/toInputAnswer", method = {RequestMethod.GET, RequestMethod.POST})
     public String toInputAnswer(HttpServletRequest request, Model model){
+        MytyAgenda agenda = agendaService.getNewAgenda();
+        model.addAttribute("roundNo", agenda.getRoundNo());
         return "baseFunction/inputAnswer";
     }
 
