@@ -94,28 +94,34 @@ public class AnswerController {
     }
 
     @RequestMapping(value="/saveMyJudge", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> saveMyJudge(@RequestParam("dmTempId")int dmTempId, @RequestParam("judge")int judge, HttpServletRequest request){
+    public Map<String, Object> saveMyJudge(@RequestParam("dmTempId")String dmTempIds, @RequestParam("userJudge")String judges, HttpServletRequest request){
         MytyUser loginUser = (MytyUser)request.getSession().getAttribute("loginUserInfo");
         MytyAgenda agenda = agendaService.getNewAgenda();
         Map map = new HashMap();
+        String[] idArray = dmTempIds.split("\t",-1);
+        String[] judgeArray = judges.split("\t",-1);
         MytyAnswer answer = new MytyAnswer();
-        answer.setDmId(dmTempId);
-        answer.setUserJudge(judge);
-        answer.setUserId(loginUser.getUserId());
-        answer.setAgendaRoundNo(agenda.getRoundNo());
-        //是否已回答
-        MytyAnswer temp = answerService.getMyAnswer(answer);
-        try{
-            if(temp == null){
-                answerService.saveMyAnswer(answer, "I");
-            } else {
-                answerService.saveMyAnswer(answer, "UJ");
+        for(int i = 0; i < idArray.length-1; i++){
+            String dmTempId = idArray[i];
+            String judge = judgeArray[i];
+            answer.setDmId(Integer.parseInt(dmTempId));
+            answer.setUserJudge(Integer.parseInt(judge));
+            answer.setUserId(loginUser.getUserId());
+            answer.setAgendaRoundNo(agenda.getRoundNo());
+            //是否已回答
+            MytyAnswer temp = answerService.getMyAnswer(answer);
+            try{
+                if(temp == null){
+                    answerService.saveMyAnswer(answer, "I");
+                } else {
+                    answerService.saveMyAnswer(answer, "UJ");
+                }
+                map.put("result", true);
+                map.put("msg", "操作成功！");
+            } catch (Exception e){
+                map.put("result", false);
+                map.put("msg", "操作失败，请刷新页面重试");
             }
-            map.put("result", true);
-            map.put("msg", "操作成功！");
-        } catch (Exception e){
-            map.put("result", false);
-            map.put("msg", "操作失败，请刷新页面重试");
         }
         return  map;
     }

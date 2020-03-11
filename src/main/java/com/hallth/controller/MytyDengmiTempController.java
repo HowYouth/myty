@@ -169,7 +169,8 @@ public class MytyDengmiTempController {
     public Map<String, Object> pingfen(HttpServletRequest request, Model model) {
         MytyAgenda agenda = agendaService.getNewAgenda();
         int currentPage = Integer.parseInt(request.getParameter("page"));
-        int pageSize = Integer.parseInt(request.getParameter("limit"));
+//        int pageSize = Integer.parseInt(request.getParameter("limit"));
+        int pageSize = Integer.parseInt(request.getParameter("rows"));
         MytyUser userInfo = (MytyUser) request.getSession().getAttribute("loginUserInfo");
         String loginUserId = userInfo.getUserId();
         Map<String, Object> map = dengmiTempService.selectNoJudgePageQuery(agenda.getRoundNo(), loginUserId, currentPage, pageSize);

@@ -135,10 +135,12 @@ public class MytyDengmiTempServiceImpl implements MytyDengmiTempService {
         List<MytyAnswerQueryBean> list = dengmiTempMapper.selectNoJudgePageQuery(dengmiTemp);
         int total = dengmiTempMapper.selectNoJudgePageQueryCount(dengmiTemp);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("count",total);
-        map.put("data",list);
+//        map.put("code", 0);
+//        map.put("msg", "");
+//        map.put("count",total);
+//        map.put("data",list);
+        map.put("total",total);
+        map.put("rows",list);
         return map;
     }
 
