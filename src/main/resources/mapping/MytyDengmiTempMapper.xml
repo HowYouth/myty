@@ -160,6 +160,7 @@
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
         where a.dm_author != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+        and a.dm_mimian != '' and a.dm_mimu != '' and a.dm_midi != ''
         limit #{startRow}, #{pageSize}
     </select>
 
@@ -169,6 +170,7 @@
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
         where a.dm_author != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+                and a.dm_mimian != '' and a.dm_mimu != '' and a.dm_midi != ''
     </select>
 
 

@@ -49,6 +49,16 @@ public class MytyDengmiTemp {
      */
     private String dmAuthor;
 
+    private String louchunzi;
+
+    public String getLouchunzi() {
+        return louchunzi;
+    }
+
+    public void setLouchunzi(String louchunzi) {
+        this.louchunzi = louchunzi;
+    }
+
     public int getDmTempId() {
         return dmTempId;
     }

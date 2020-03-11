@@ -65,6 +65,10 @@
         if (endEditing()){
             var data = $('#input_mySubject_table').datagrid('getChanges', "updated");
             console.log('data', data);
+            if(data.length == 0){
+                $.messager.alert('提示','您没有未保存的内容。');
+                return;
+            }
             var dmTempId = '';
             var dmMimian = '';
             var dmMimu = '';
@@ -90,8 +94,12 @@
             }, function (data) {
                 if (!data.result) {
                     $.messager.alert('提示',data.msg);
+                } else {
+                    $.messager.alert('提示','保存成功');
                 }
             });
+            // $('#input_mySubject_table').datagrid('load', {
+            // });
         }
     }
 
@@ -109,10 +117,15 @@
         ]],
         columns: [[
             {field: 'dmTempId', title: 'ID', hidden: true}
-            , {field: 'dmMimu', editor: 'text', title: '谜目/谜格', width: setWidth(18)}
-            , {field: 'dmMidi', editor: 'text', title: '谜底', width: setWidth(18)}
-            , {field: 'dmMimianzhu', editor: 'text', title: '谜面注解', width: setWidth(20)}
-            , {field: 'dmMidizhu', editor: 'text', title: '谜底注解', width: setWidth(20)}
+            , {field: 'dmMimu', editor: 'text', title: '谜目/谜格', width: setWidth(15)}
+            , {field: 'dmMidi', editor: 'text', title: '谜底', width: setWidth(15)}
+            , {field: 'dmMimianzhu', editor: 'text', title: '谜面注解', width: setWidth(18)}
+            , {field: 'dmMidizhu', editor: 'text', title: '谜底注解', width: setWidth(18)}
+            , {field: 'louchunzi', title: '露春字', width: setWidth(9),
+                formatter: function (value, rec, index) {
+                    return '<span style="color: red;">' + (value == null ? '' : value) + '</span>';
+                }
+            }
         ]],
         onClickCell: function (index, field, value) {
             $('#input_mySubject_table').datagrid('beginEdit', index);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,15 +65,38 @@ public class MytyDengmiTempController {
         String loginUserId = userInfo.getUserId();
         Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(),loginUserId, 1, Integer.MAX_VALUE, true);
         List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
-        if(list == null || list.size() == 0){
+        List<MytyDengmiTemp> list1 = new ArrayList<>();
+        for(MytyDengmiTemp item : list){
+            if(item.getDmMimian() != null && item.getDmMidi() != null && !item.getDmMimian().trim().isEmpty() && !item.getDmMidi().trim().isEmpty()){
+                String mimian = item.getDmMimian();
+                String midi = item.getDmMidi();
+                char[] mimianChars = mimian.toCharArray();
+                char[] midiChars = midi.toCharArray();
+                int count = 0;
+                StringBuffer sb = new StringBuffer();
+                for(char c : midiChars){
+                    for(char midiC : mimianChars){
+                        if (c == midiC){
+                            sb.append(c);
+                            count ++;
+                        }
+                    }
+                }
+                if(count > 0){
+                    item.setLouchunzi(sb.toString());
+                }
+                list1.add(item);
+            }
+        }
+        if(list1 == null || list1.size() == 0){
             for(int i = 0; i < inputCount; i ++){
                 MytyDengmiTemp dengmi = createDengmiTemp();
-                list.add(dengmi);
+                list1.add(dengmi);
             }
         } else {
-            for(int i = 0; i < inputCount - list.size(); i ++){
+            for(int i = 0; i < inputCount - list1.size(); i ++){
                 MytyDengmiTemp dengmi = createDengmiTemp();
-                list.add(dengmi);
+                list1.add(dengmi);
             }
         }
 //        map.put("code", 0);
@@ -80,7 +104,7 @@ public class MytyDengmiTempController {
 //        map.put("count", inputCount);
 //        map.put("data", list);
         map.put("total", inputCount);
-        map.put("rows", list);
+        map.put("rows", list1);
         return map;
     }
 

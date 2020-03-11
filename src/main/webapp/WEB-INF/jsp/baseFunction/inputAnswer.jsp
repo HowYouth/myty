@@ -89,6 +89,10 @@
         if (endEditing()){
             var data = $('#input_answer_table').datagrid('getChanges', "updated");
             console.log('data', data);
+            if(data.length == 0){
+                $.messager.alert('提示','您没有未保存的内容。');
+                return;
+            }
             var dmTempId = '';
             var dmMidi = '';
             for(var i = 0; i < data.length; i++){
@@ -99,6 +103,8 @@
             $.post("/answer/saveMyAnswer", {dmTempId: dmTempId, dmMidi: dmMidi}, function (data) {
                 if (!data.result) {
                     $.messager.alert('提示',data.msg);
+                } else {
+                    $.messager.alert('提示','保存成功');
                 }
             });
         }
