@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/js/myjs.js"></script>
+    <%--<script type="text/javascript" src="/js/jquery.form.js"></script>--%>
     <script src="/font/iconfont.js"></script>
 </head>
 <body>
@@ -66,38 +67,56 @@
     </a>
 </div>
 <div id="good_subject_search_tool" style="padding:3px">
-    <span>轮次:</span>
-    <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_good_subject"
-            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chaxun"></use>
-        </svg>
-        查询
-    </a>
-    <a href="#" class="easyui-linkbutton" plain="true" onclick="doExportGood()">
-        <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-export"></use>
-        </svg>
-        导出
-    </a>
+    <form action="/export/exportSubject" id="export-form-good" method="post">
+        <span>轮次:</span>
+        <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_good_subject" name="roundNo" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="doGoodSubjectSearch()">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-chaxun"></use>
+            </svg>
+            查询
+        </a>
+        <input name="tabs" value="goodSubject" hidden/>
+        <input name="fanwei" value="1" hidden/>
+        <input name="type"  hidden id="type2"/>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(1,0)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为Excel
+        </a>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(0,0)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为txt
+        </a>
+    </form>
 </div>
 <div id="all_subject_search_tool" >
-    <form>
+    <form action="/export/exportSubject" id="export-form-all" method="post">
         <span>轮次:</span>
-        <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_all_subject"
-                style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
+        <select class="easyui-combotree" url="/agenda/getAllAgenda" id="roundNo_all_subject" name="roundNo" style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
         <a href="#" class="easyui-linkbutton" plain="true" onclick="doAllSubjectSearch()">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-chaxun"></use>
             </svg>
             查询
         </a>
-        <a href="#" class="easyui-linkbutton" plain="true" onclick="doExportAll()">
+        <input name="tabs" value="allSubject" hidden/>
+        <input name="fanwei" value="1" hidden/>
+        <input name="type"  hidden id="type"/>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(1,1)">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-export"></use>
             </svg>
-            导出
+            导出为Excel
+        </a>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(0,1)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为txt
         </a>
     </form>
 </div>
@@ -105,55 +124,39 @@
     <table id="score_detail_table" style="width: 100%"></table>
     <table id="subject_detail_table" style="width: 100%"></table>
 </div>
-
-<div id="export-window" class="easyui-window" closed="true" title="导出条件" style="width: 500px;height: 188px;">
-    <form id="export_subject_form" action="/export/exportSubject" method="post">
-        <table>
-            <input type="text" name="tabs" id="tabs" hidden/>
-            <tr>
-                <td>轮次:</td>
-                <td>
-                    <select class="easyui-combotree" url="/agenda/getAllAgenda" name="roundNo" id="roundNo_all_subject_export"
-                            style="width: 200px; line-height:26px;border:1px solid #ccc"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>导出范围:</td>
-                <td>
-                    <span class="radioSpan">
-                        <input type="radio" name="fanwei" value="1" checked>导出本轮全部</input>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>文本类型:</td>
-                <td>
-                    <span class="radioSpan">
-                        <input type="radio" name="type" value="0" checked>导出到txt</input>
-                        <input type="radio" name="type" value="1">导出到Excel</input>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <button type="submit">
-                        <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-export"></use>
-                        </svg>
-                        导出
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </form>
+<div id="subject-window" class="easyui-window" closed="true" title="详情页面" style="width: 95%;height: 88%;">
+    <table id="subject_answer_detail_table" style="width: 100%"></table>
+    <table id="user_answer_detail_table" style="width: 100%"></table>
 </div>
 </body>
+<script type="text/javascript">
+    function submitExportForm(param, tabs){
+        debugger;
+        var roundNo = '';
+        var form_id = '';
+        if(tabs == 1){//全部谜题
+            roundNo = $('#roundNo_all_subject').combobox("getValue");
+            $('#type').val(param);
+            form_id = 'export-form-all';
+        } else {
+            roundNo = $('#roundNo_good_subject').combobox("getValue");
+            $('#type2').val(param);
+            form_id = 'export-form-good';
+        }
+        console.log(roundNo);
+        if(roundNo == null || roundNo == ""){
+            $.messager.alert('提示','请选择轮次');
+            return;
+        }
+        $('#'+form_id).submit();
+    }
+</script>
 <%--本轮得分榜--%>
 <script type="text/javascript">
     var firstSubWinWidth;
     var secondSubWinWidth;
     var flag = 0;
+    var flag2 = 0;
     $('#this_score_table').datagrid({
         fit: true, //自适应高度
         singleSelect: true,
@@ -215,8 +218,11 @@
                         {field: 'dm_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(15)}
                         , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(17)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(30),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(5)}
                         , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(5)}
                         , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(5)}
@@ -377,12 +383,16 @@
                     columns: [[
                         {field: 'dm_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
-                        , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(12)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(12)}
+                        , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(10)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(20),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'dm_author_name', title: '作者', width: setSecondSubWinWidth(8)}
-                        , {field: 'user_answer', title: userName + '猜射', width: setSecondSubWinWidth(15)}
+                        , {field: 'user_answer', title: userName + '猜射', width: setSecondSubWinWidth(10)}
                         , {field: 'user_answer_score', title: '猜射得分', width: setSecondSubWinWidth(5)}
+                        , {field: 'user_comment', title: userName+'点评', width: setSecondSubWinWidth(12)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -437,7 +447,7 @@
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-            , {field: 'userSubScore', sortable: true, title: '制谜得分', width: setWidth(50)}
+            , {field: 'userSubScore', sortable: true, title: '制谜得分', width: setWidth(49)}
         ]],
         onClickCell: function (index, field, value) {
             if (field == 'user_name') {
@@ -478,8 +488,11 @@
                         {field: 'dm_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
                         , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSecondSubWinWidth(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(28),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
                         , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(8)}
                         , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(8)}
                         , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(8)}
@@ -526,31 +539,40 @@
         nowrap: false,
         idField: 'dm_temp_id',
         url: '/dengmiTemp/goodSubject',
-        rownumbers: true,
+        rownumbers: false,
         pagination: false,
         pageList: [10, 20, 50, 100],
-        frozenColumns: [[
+        // frozenColumns: [[
+        //     {
+        //         field: 'dm_mimian', title: '谜面', width: setWidth(19),
+        //         formatter: function (value, rec, index) {
+        //             return '<super-link>' + value + '</super-link>';
+        //         }
+        //     }
+        // ]],
+        columns: [[
             {
                 field: 'dm_mimian', title: '谜面', width: setWidth(19),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-        ]],
-        columns: [[
-            {field: 'dm_temp_id', title: 'ID', hidden: true}
+            , {field: 'dm_temp_id', title: 'ID', hidden: true}
             , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
             , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
-            , {field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
-            , {field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
+            , {field: 'dm_mimianzhu', title: '注解', width: setWidth(38),
+                formatter: function (value, rec, index) {
+                    return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                }
+            }
             , {field: 'user_name', title: '作者', width: setWidth(6)}
             , {field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
         ]],
         onClickCell: function (index, field, value) {
             if (field == 'dm_mimian') {
                 var row = $('#good_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
-                $('#win').window('open');
-                $('#score_detail_table').datagrid({
+                $('#subject-window').window('open');
+                $('#subject_answer_detail_table').datagrid({
                     title: '谜题详情',
                     // fit:true, //自适应高度
                     // height: 200,
@@ -561,18 +583,21 @@
                     rownumbers: true,
                     pagination: false,
                     frozenColumns: [[
-                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth(20)}
+                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
-                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
-                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
-                        , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth2(15)}
+                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth2(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth2(30),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
+                        , {field: 'user_name', title: '作者', width: setSubWinWidth2(12)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid({
+                $('#user_answer_detail_table').datagrid({
                     title: '用户猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
@@ -583,17 +608,18 @@
                     pagination: true,
                     pageList: [10, 20, 50, 100],
                     frozenColumns: [[
-                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth(20)}
+                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'userId', title: '用户ID', hidden: true}
-                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
-                        , {field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth2(16)}
+                        , {field: 'result', title: '列中', width: setSecondSubWinWidth2(10)}
+                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_comment', sortable: true, title: '用户点评', width: setSecondSubWinWidth2(20)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid('getPager').pagination({
+                $('#user_answer_detail_table').datagrid('getPager').pagination({
                     // showPageList:true,
                     beforePageText: '第',//页数文本框前显示的汉字
                     afterPageText: '页    共 {pages} 页',
@@ -606,6 +632,29 @@
         }
     });
 
+    $('#subject-window').window({
+        collapsible: false,
+        minimizable: false
+    });
+
+    function setSubWinWidth2(percent) {
+        if (flag2 == 0) {
+            firstSubWinWidth = $("#subject_answer_detail_table").width();
+            secondSubWinWidth = $("#user_answer_detail_table").width();
+        }
+        flag2++;
+        return firstSubWinWidth * percent / 100;
+    }
+
+    function setSecondSubWinWidth2(percent) {
+        if (flag2 == 0) {
+            firstSubWinWidth = $("#subject_answer_detail_table").width();
+            secondSubWinWidth = $("#user_answer_detail_table").width();
+        }
+        flag2++;
+        return secondSubWinWidth * percent / 100;
+    }
+
     function setWidth(percent) {
         return $("#good_subject_table").width() * percent / 100;
     }
@@ -615,12 +664,6 @@
             roundNo: $('#roundNo_good_subject').combobox("getValue")
         });
     }
-
-    function doExportGood() {
-        $('#export-window').window('open');
-        $("#tabs").val('goodSubject');
-    }
-
 
     $('#good_subject_table').datagrid('getPager').pagination({
         // showPageList:true,
@@ -643,28 +686,37 @@
         rownumbers: true,
         pagination: true,
         pageList: [10, 20, 50, 100],
-        frozenColumns: [[
+        // frozenColumns: [[
+        //     {
+        //         field: 'dm_mimian', title: '谜面', width: setWidth(19),
+        //         formatter: function (value, rec, index) {
+        //             return '<super-link>' + value + '</super-link>';
+        //         }
+        //     }
+        // ]],
+        columns: [[
             {
                 field: 'dm_mimian', title: '谜面', width: setWidth(19),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-        ]],
-        columns: [[
-            {field: 'dm_temp_id', title: 'ID', hidden: true}
+            , {field: 'dm_temp_id', title: 'ID', hidden: true}
             , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
             , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
-            , {field: 'dm_mimianzhu', title: '谜面注', width: setWidth(19)}
-            , {field: 'dm_midizhu', title: '谜底注', width: setWidth(19)}
+            , {field: 'dm_mimianzhu', title: '注解', width: setWidth(38),
+                formatter: function (value, rec, index) {
+                    return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                }
+            }
             , {field: 'user_name', title: '作者', width: setWidth(6)}
             , {field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
         ]],
         onClickCell: function (index, field, value) {
             if (field == 'dm_mimian') {
                 var row = $('#all_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
-                $('#win').window('open');
-                $('#score_detail_table').datagrid({
+                $('#subject-window').window('open');
+                $('#subject_answer_detail_table').datagrid({
                     title: '谜题详情',
                     // fit:true, //自适应高度
                     // height: 200,
@@ -675,18 +727,21 @@
                     rownumbers: true,
                     pagination: false,
                     frozenColumns: [[
-                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth(20)}
+                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
-                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
-                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '谜面注解', width: setSubWinWidth(15)}
-                        , {field: 'dm_midizhu', title: '谜底注解', width: setSubWinWidth(15)}
-                        , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth2(15)}
+                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth2(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth2(30),
+                            formatter: function (value, rec, index) {
+                                return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
+                            }
+                        }
+                        , {field: 'user_name', title: '作者', width: setSubWinWidth2(12)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid({
+                $('#user_answer_detail_table').datagrid({
                     title: '用户猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
@@ -697,17 +752,18 @@
                     pagination: true,
                     pageList: [10, 20, 50, 100],
                     frozenColumns: [[
-                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth(20)}
+                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'userId', title: '用户ID', hidden: true}
-                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
-                        , {field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth2(16)}
+                        , {field: 'result', title: '列中', width: setSecondSubWinWidth2(10)}
+                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_comment', sortable: true, title: '用户评分', width: setSecondSubWinWidth2(20)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid('getPager').pagination({
+                $('#user_answer_detail_table').datagrid('getPager').pagination({
                     // showPageList:true,
                     beforePageText: '第',//页数文本框前显示的汉字
                     afterPageText: '页    共 {pages} 页',
@@ -730,17 +786,6 @@
         });
     }
 
-    function doExportAll() {
-        $('#export-window').window('open');
-        $("#tabs").val('allSubject');
-    }
-
-    $('#export-window').window({
-        collapsible: false,
-        minimizable: false
-    });
-
-
     $('#all_subject_table').datagrid('getPager').pagination({
         // showPageList:true,
         beforePageText: '第',//页数文本框前显示的汉字
@@ -754,6 +799,7 @@
 <style type="text/css">
     super-link {
         cursor: pointer;
+        color: #0000FF;
     }
 </style>
 </html>

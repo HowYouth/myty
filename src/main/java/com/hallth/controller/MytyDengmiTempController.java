@@ -65,7 +65,7 @@ public class MytyDengmiTempController {
         String loginUserId = userInfo.getUserId();
         Map<String, Object> map = dengmiTempService.selectByUserIdPageQuery(agenda.getRoundNo(),loginUserId, 1, Integer.MAX_VALUE, true);
         List<MytyDengmiTemp> list = (List<MytyDengmiTemp>)map.get("data");
-        List<MytyDengmiTemp> list1 = new ArrayList<>();
+//        List<MytyDengmiTemp> list1 = new ArrayList<>();
         for(MytyDengmiTemp item : list){
             if(item.getDmMimian() != null && item.getDmMidi() != null && !item.getDmMimian().trim().isEmpty() && !item.getDmMidi().trim().isEmpty()){
                 String mimian = item.getDmMimian();
@@ -85,26 +85,26 @@ public class MytyDengmiTempController {
                 if(count > 0){
                     item.setLouchunzi(sb.toString());
                 }
-                list1.add(item);
+//                list1.add(item);
             }
         }
-        if(list1 == null || list1.size() == 0){
-            for(int i = 0; i < inputCount; i ++){
-                MytyDengmiTemp dengmi = createDengmiTemp();
-                list1.add(dengmi);
-            }
-        } else {
-            for(int i = 0; i < inputCount - list1.size(); i ++){
-                MytyDengmiTemp dengmi = createDengmiTemp();
-                list1.add(dengmi);
-            }
-        }
+//        if(list1 == null || list1.size() == 0){
+//            for(int i = 0; i < inputCount; i ++){
+//                MytyDengmiTemp dengmi = createDengmiTemp();
+//                list1.add(dengmi);
+//            }
+//        } else {
+//            for(int i = 0; i < inputCount - list1.size(); i ++){
+//                MytyDengmiTemp dengmi = createDengmiTemp();
+//                list1.add(dengmi);
+//            }
+//        }
 //        map.put("code", 0);
 //        map.put("msg", "");
 //        map.put("count", inputCount);
 //        map.put("data", list);
         map.put("total", inputCount);
-        map.put("rows", list1);
+        map.put("rows", list);
         return map;
     }
 

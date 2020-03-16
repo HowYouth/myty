@@ -124,6 +124,10 @@
     <table id="score_detail_table" style="width: 100%"></table>
     <table id="subject_detail_table" style="width: 100%"></table>
 </div>
+<div id="subject-window" class="easyui-window" closed="true" title="详情页面" style="width: 95%;height: 88%;">
+    <table id="subject_answer_detail_table" style="width: 100%"></table>
+    <table id="user_answer_detail_table" style="width: 100%"></table>
+</div>
 </body>
 <script type="text/javascript">
     function submitExportForm(param, tabs){
@@ -152,6 +156,7 @@
     var firstSubWinWidth;
     var secondSubWinWidth;
     var flag = 0;
+    var flag2 = 0;
     $('#this_score_table').datagrid({
         fit: true, //自适应高度
         singleSelect: true,
@@ -378,15 +383,16 @@
                     columns: [[
                         {field: 'dm_id', title: 'ID', hidden: true}
                         , {field: 'dm_mimu', title: '谜目/谜格', width: setSecondSubWinWidth(10)}
-                        , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(24),
+                        , {field: 'dm_midi', title: '谜底', width: setSecondSubWinWidth(10)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSecondSubWinWidth(20),
                             formatter: function (value, rec, index) {
                                 return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
                             }
                         }
                         , {field: 'dm_author_name', title: '作者', width: setSecondSubWinWidth(8)}
-                        , {field: 'user_answer', title: userName + '猜射', width: setSecondSubWinWidth(15)}
+                        , {field: 'user_answer', title: userName + '猜射', width: setSecondSubWinWidth(10)}
                         , {field: 'user_answer_score', title: '猜射得分', width: setSecondSubWinWidth(5)}
+                        , {field: 'user_comment', title: userName+'点评', width: setSecondSubWinWidth(12)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -441,7 +447,7 @@
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-            , {field: 'userSubScore', sortable: true, title: '制谜得分', width: setWidth(50)}
+            , {field: 'userSubScore', sortable: true, title: '制谜得分', width: setWidth(49)}
         ]],
         onClickCell: function (index, field, value) {
             if (field == 'user_name') {
@@ -533,19 +539,25 @@
         nowrap: false,
         idField: 'dm_temp_id',
         url: '/dengmiTemp/goodSubject',
-        rownumbers: true,
+        rownumbers: false,
         pagination: false,
         pageList: [10, 20, 50, 100],
-        frozenColumns: [[
+        // frozenColumns: [[
+        //     {
+        //         field: 'dm_mimian', title: '谜面', width: setWidth(19),
+        //         formatter: function (value, rec, index) {
+        //             return '<super-link>' + value + '</super-link>';
+        //         }
+        //     }
+        // ]],
+        columns: [[
             {
                 field: 'dm_mimian', title: '谜面', width: setWidth(19),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-        ]],
-        columns: [[
-            {field: 'dm_temp_id', title: 'ID', hidden: true}
+            , {field: 'dm_temp_id', title: 'ID', hidden: true}
             , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
             , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
             , {field: 'dm_mimianzhu', title: '注解', width: setWidth(38),
@@ -559,8 +571,8 @@
         onClickCell: function (index, field, value) {
             if (field == 'dm_mimian') {
                 var row = $('#good_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
-                $('#win').window('open');
-                $('#score_detail_table').datagrid({
+                $('#subject-window').window('open');
+                $('#subject_answer_detail_table').datagrid({
                     title: '谜题详情',
                     // fit:true, //自适应高度
                     // height: 200,
@@ -571,21 +583,21 @@
                     rownumbers: true,
                     pagination: false,
                     frozenColumns: [[
-                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth(20)}
+                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
-                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
-                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth(30),
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth2(15)}
+                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth2(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth2(30),
                             formatter: function (value, rec, index) {
                                 return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
                             }
                         }
-                        , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
+                        , {field: 'user_name', title: '作者', width: setSubWinWidth2(12)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid({
+                $('#user_answer_detail_table').datagrid({
                     title: '用户猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
@@ -596,17 +608,18 @@
                     pagination: true,
                     pageList: [10, 20, 50, 100],
                     frozenColumns: [[
-                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth(20)}
+                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'userId', title: '用户ID', hidden: true}
-                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
-                        , {field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth2(16)}
+                        , {field: 'result', title: '列中', width: setSecondSubWinWidth2(10)}
+                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_comment', sortable: true, title: '用户点评', width: setSecondSubWinWidth2(20)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid('getPager').pagination({
+                $('#user_answer_detail_table').datagrid('getPager').pagination({
                     // showPageList:true,
                     beforePageText: '第',//页数文本框前显示的汉字
                     afterPageText: '页    共 {pages} 页',
@@ -618,6 +631,29 @@
             }
         }
     });
+
+    $('#subject-window').window({
+        collapsible: false,
+        minimizable: false
+    });
+
+    function setSubWinWidth2(percent) {
+        if (flag2 == 0) {
+            firstSubWinWidth = $("#subject_answer_detail_table").width();
+            secondSubWinWidth = $("#user_answer_detail_table").width();
+        }
+        flag2++;
+        return firstSubWinWidth * percent / 100;
+    }
+
+    function setSecondSubWinWidth2(percent) {
+        if (flag2 == 0) {
+            firstSubWinWidth = $("#subject_answer_detail_table").width();
+            secondSubWinWidth = $("#user_answer_detail_table").width();
+        }
+        flag2++;
+        return secondSubWinWidth * percent / 100;
+    }
 
     function setWidth(percent) {
         return $("#good_subject_table").width() * percent / 100;
@@ -650,16 +686,22 @@
         rownumbers: true,
         pagination: true,
         pageList: [10, 20, 50, 100],
-        frozenColumns: [[
+        // frozenColumns: [[
+        //     {
+        //         field: 'dm_mimian', title: '谜面', width: setWidth(19),
+        //         formatter: function (value, rec, index) {
+        //             return '<super-link>' + value + '</super-link>';
+        //         }
+        //     }
+        // ]],
+        columns: [[
             {
                 field: 'dm_mimian', title: '谜面', width: setWidth(19),
                 formatter: function (value, rec, index) {
                     return '<super-link>' + value + '</super-link>';
                 }
             }
-        ]],
-        columns: [[
-            {field: 'dm_temp_id', title: 'ID', hidden: true}
+            , {field: 'dm_temp_id', title: 'ID', hidden: true}
             , {field: 'dm_mimu', title: '谜目', width: setWidth(12)}
             , {field: 'dm_midi', title: '谜底', width: setWidth(18)}
             , {field: 'dm_mimianzhu', title: '注解', width: setWidth(38),
@@ -673,8 +715,8 @@
         onClickCell: function (index, field, value) {
             if (field == 'dm_mimian') {
                 var row = $('#all_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
-                $('#win').window('open');
-                $('#score_detail_table').datagrid({
+                $('#subject-window').window('open');
+                $('#subject_answer_detail_table').datagrid({
                     title: '谜题详情',
                     // fit:true, //自适应高度
                     // height: 200,
@@ -685,21 +727,21 @@
                     rownumbers: true,
                     pagination: false,
                     frozenColumns: [[
-                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth(20)}
+                        {field: 'dm_mimian', title: '谜面', width: setSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'dm_temp_id', title: 'ID', hidden: true}
-                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth(15)}
-                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth(15)}
-                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth(30),
+                        , {field: 'dm_mimu', title: '谜目/谜格', width: setSubWinWidth2(15)}
+                        , {field: 'dm_midi', title: '谜底', width: setSubWinWidth2(15)}
+                        , {field: 'dm_mimianzhu', title: '注解', width: setSubWinWidth2(30),
                             formatter: function (value, rec, index) {
                                 return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
                             }
                         }
-                        , {field: 'user_name', title: '作者', width: setSubWinWidth(12)}
+                        , {field: 'user_name', title: '作者', width: setSubWinWidth2(12)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid({
+                $('#user_answer_detail_table').datagrid({
                     title: '用户猜射情况',
                     // fit:true, //自适应高度
                     singleSelect: true,
@@ -710,17 +752,18 @@
                     pagination: true,
                     pageList: [10, 20, 50, 100],
                     frozenColumns: [[
-                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth(20)}
+                        {field: 'user_name', title: '用户', fixed: 'left', width: setSecondSubWinWidth2(20)}
                     ]],
                     columns: [[
                         {field: 'userId', title: '用户ID', hidden: true}
-                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth(19)}
-                        , {field: 'result', title: '列中', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth(19)}
-                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth(19)}
+                        , {field: 'user_answer', title: '猜射', width: setSecondSubWinWidth2(16)}
+                        , {field: 'result', title: '列中', width: setSecondSubWinWidth2(10)}
+                        , {field: 'user_answer_score', sortable: true, title: '用户得分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_judge', sortable: true, title: '用户评分', width: setSecondSubWinWidth2(15)}
+                        , {field: 'user_comment', sortable: true, title: '用户评分', width: setSecondSubWinWidth2(20)}
                     ]]
                 });
-                $('#subject_detail_table').datagrid('getPager').pagination({
+                $('#user_answer_detail_table').datagrid('getPager').pagination({
                     // showPageList:true,
                     beforePageText: '第',//页数文本框前显示的汉字
                     afterPageText: '页    共 {pages} 页',

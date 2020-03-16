@@ -52,6 +52,7 @@
             }
             var dmTempId = '';
             var userJudge = '';
+            var userComment = '';
             for(var i = 0; i < data.length; i++){
                 var item = data[i];
                 if(item.user_judge > 10 || item.user_judge < 0){
@@ -60,8 +61,9 @@
                 }
                 dmTempId = item.dm_temp_id + '\t' + dmTempId;
                 userJudge = item.user_judge + '\t' + userJudge;
+                userComment = item.user_comment + '\t' + userComment;
             }
-            $.post("/answer/saveMyJudge", {dmTempId: dmTempId, userJudge: userJudge}, function (data) {
+            $.post("/answer/saveMyJudge", {dmTempId: dmTempId, userJudge: userJudge, userComment:userComment}, function (data) {
                 if (!data.result) {
                     $.messager.alert('提示',data.msg);
                 } else {
@@ -86,17 +88,18 @@
         columns: [[
             {field: 'dm_temp_id', title: 'ID', hidden: true}
             ,{field: 'dm_mimu', title: '谜目', width: setWidth(10)}
-            ,{field: 'dm_mimianzhu', title: '注解', width: setWidth(30),
+            ,{field: 'dm_mimianzhu', title: '注解', width: setWidth(18),
                 formatter: function (value, rec, index) {
                     return (rec.dm_mimianzhu == null ? "" : rec.dm_mimianzhu) + (rec.dm_midizhu == null ? "" : rec.dm_midizhu);
                 }
             }
-            ,{field: 'dm_midi', title: '谜底', width: setWidth(15)}
-            ,{field: 'user_answer', title: '我的谜底', width: setWidth(15)}
+            ,{field: 'dm_midi', title: '谜底', width: setWidth(12)}
+            ,{field: 'user_answer', title: '我的谜底', width: setWidth(12)}
             ,{field: 'user_judge', title: '评分', width: setWidth(8), editor: 'numberbox'}
+            ,{field: 'user_comment', title: '点评', width: setWidth(18), editor: 'text'}
         ]],
         onClickCell: function (index, field, value) {
-            if (field == 'user_judge') {
+            if (field == 'user_judge' || field == 'user_comment') {
                 $('#input_answer_table').datagrid('beginEdit', index);
                 if (editIndex != index){
                     if (endEditing()){

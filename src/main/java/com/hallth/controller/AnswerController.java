@@ -57,7 +57,7 @@ public class AnswerController {
                 map.put("msg", "操作成功！");
             } catch (Exception e){
                 map.put("result", false);
-                map.put("msg", "操作失败，请刷新页面重试");
+                map.put("msg", "操作失败，请刷新页面重试" + e.getMessage());
             }
         }
         return  map;
@@ -94,12 +94,13 @@ public class AnswerController {
     }
 
     @RequestMapping(value="/saveMyJudge", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> saveMyJudge(@RequestParam("dmTempId")String dmTempIds, @RequestParam("userJudge")String judges, HttpServletRequest request){
+    public Map<String, Object> saveMyJudge(@RequestParam("dmTempId")String dmTempIds, @RequestParam("userJudge")String judges, @RequestParam("userComment") String userComments, HttpServletRequest request){
         MytyUser loginUser = (MytyUser)request.getSession().getAttribute("loginUserInfo");
         MytyAgenda agenda = agendaService.getNewAgenda();
         Map map = new HashMap();
         String[] idArray = dmTempIds.split("\t",-1);
         String[] judgeArray = judges.split("\t",-1);
+        String[] commentArray = userComments.split("\t",-1);
         MytyAnswer answer = new MytyAnswer();
         for(int i = 0; i < idArray.length-1; i++){
             String dmTempId = idArray[i];
@@ -108,6 +109,7 @@ public class AnswerController {
             answer.setUserJudge(Integer.parseInt(judge));
             answer.setUserId(loginUser.getUserId());
             answer.setAgendaRoundNo(agenda.getRoundNo());
+            answer.setUserComment(commentArray[i]);
             //是否已回答
             MytyAnswer temp = answerService.getMyAnswer(answer);
             try{
@@ -128,23 +130,15 @@ public class AnswerController {
 
     @RequestMapping(value = "/getScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> getScoreInfo(HttpServletRequest request, Model model) {
-        MytyAgenda agenda = agendaService.getNewAgenda();
-//        int currentPage = Integer.parseInt(request.getParameter("page"));
-//        int pageSize = Integer.parseInt(request.getParameter("limit"));
-        int currentPage = Integer.parseInt(request.getParameter("page"));
-        int pageSize = Integer.parseInt(request.getParameter("rows"));
-        int roundNo = agenda.getRoundNo();
-        if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
-            roundNo = agenda.getEndTime().getTime() > System.currentTimeMillis() ? (agenda.getRoundNo() - 1) : agenda.getRoundNo();
-        } else {
-            roundNo = Integer.parseInt(request.getParameter("roundNo"));
-        }
-        Map<String, Object> map = answerService.getScoreInfo(roundNo, currentPage, pageSize);
-        return map;
+        return scoreInfo(request);
     }
 
     @RequestMapping(value = "/getAnswerScoreInfo", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> getAnswerScoreInfo(HttpServletRequest request, Model model) {
+        return scoreInfo(request);
+    }
+
+    private Map<String, Object> scoreInfo(HttpServletRequest request){
         MytyAgenda agenda = agendaService.getNewAgenda();
 //        int currentPage = Integer.parseInt(request.getParameter("page"));
 //        int pageSize = Integer.parseInt(request.getParameter("limit"));
@@ -162,19 +156,7 @@ public class AnswerController {
 
     @RequestMapping(value = "/getSubjectScoreCount", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> getSubjectScoreCount(HttpServletRequest request, Model model) {
-        MytyAgenda agenda = agendaService.getNewAgenda();
-//        int currentPage = Integer.parseInt(request.getParameter("page"));
-//        int pageSize = Integer.parseInt(request.getParameter("limit"));
-        int currentPage = Integer.parseInt(request.getParameter("page"));
-        int pageSize = Integer.parseInt(request.getParameter("rows"));
-        int roundNo = agenda.getRoundNo();
-        if(request.getParameter("roundNo") == null || request.getParameter("roundNo").equals("")){
-            roundNo = agenda.getEndTime().getTime() > System.currentTimeMillis() ? (agenda.getRoundNo() - 1) : agenda.getRoundNo();
-        } else {
-            roundNo = Integer.parseInt(request.getParameter("roundNo"));
-        }
-        Map<String, Object> map = answerService.getScoreInfo(roundNo, currentPage, pageSize);
-        return map;
+        return scoreInfo(request);
     }
 
     @RequestMapping(value="/saveIsright", method = {RequestMethod.GET, RequestMethod.POST})

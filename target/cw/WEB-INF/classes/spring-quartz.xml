@@ -31,7 +31,7 @@
     <bean id="DailyTaskCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="CountScore"></property>
         <!-- 每分钟的第一秒触发   -->
-        <property name="cronExpression" value="1 * * 1 * ?"></property>
+        <property name="cronExpression" value="1 * * * * ?"></property>
         <!-- 每小时的第一分钟触发  -->
         <!--  <property name="cronExpression" value="0 1 * * * ?"></property>  -->
     </bean>

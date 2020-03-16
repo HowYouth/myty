@@ -141,6 +141,7 @@
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
         where a.dm_author != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+        and a.dm_mimian != '' AND  a.dm_mimu != '' and a.dm_midi != ''
         limit #{startRow}, #{pageSize}
     </select>
 
@@ -150,14 +151,16 @@
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
         where a.dm_author != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+                and a.dm_mimian != '' AND  a.dm_mimu != '' and a.dm_midi != ''
     </select>
 
     <select id="selectNoJudgePageQuery" parameterType="com.hallth.domain.MytyDengmiTemp"
             resultType="com.hallth.domain.MytyAnswerQueryBean">
-        select a.dm_temp_id, a.dm_mimian, a.dm_mimu, a.dm_midi, a.dm_mimianzhu, a.dm_midizhu, b.user_answer, b.user_id, b.user_judge
+        select a.dm_temp_id, a.dm_mimian, a.dm_mimu, a.dm_midi, a.dm_mimianzhu, a.dm_midizhu, b.user_answer, b.user_id, b.user_judge,b.user_comment
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
         where a.dm_author != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+        and a.dm_mimian != '' and a.dm_mimu != '' and a.dm_midi != ''
         limit #{startRow}, #{pageSize}
     </select>
 
@@ -167,6 +170,7 @@
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id and b.user_id = #{dmAuthor,jdbcType=VARCHAR}
         where a.dm_author != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+                and a.dm_mimian != '' and a.dm_mimu != '' and a.dm_midi != ''
     </select>
 
 
@@ -186,7 +190,7 @@
         select count(*)
         from myty_dengmi_temp a
         left join myty_answer b on a.dm_temp_id = b.dm_id
-        where a.dm_author = #{dmAuthor,jdbcType=VARCHAR} and b.user_id != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER}
+        where a.dm_author = #{dmAuthor,jdbcType=VARCHAR} and b.user_id != #{dmAuthor,jdbcType=VARCHAR} and a.agenda_round_no = #{agendaRoundNo,jdbcType=INTEGER} and b.user_answer != a.dm_midi
     </select>
 
     <select id="selectById" parameterType="com.hallth.domain.MytyDengmiTemp" resultMap="BaseResultMap">
@@ -224,7 +228,7 @@
     <select id="getInputSubjectCounts" parameterType="com.hallth.domain.MytyAgenda" resultType="com.hallth.domain.SaikuangBean">
         select B.user_id,B.user_name, count(A.dm_mimian) as count from myty_dengmi_temp A
         left join myty_user B on A.dm_author = B.user_id
-        where A.agenda_round_no = #{roundNo,jdbcType=INTEGER}
+        where A.agenda_round_no = #{roundNo,jdbcType=INTEGER} and (A.dm_mimian != '' and A.dm_mimu != '' and A.dm_midi != '')
         group by A.dm_author
     </select>
 
@@ -235,7 +239,7 @@
         from myty_dengmi_temp dm
         left join myty_user u on u.user_id = dm.dm_author
         left join myty_answer a on a.dm_id = dm.dm_temp_id
-        where dm.agenda_round_no = #{agenda_round_no}
+        where dm.agenda_round_no = #{agenda_round_no} and dm.dm_mimian != '' and dm.dm_mimu != '' and dm.dm_midi != ''
         group by dm.dm_temp_id
         limit #{startRow}, #{pageSize}
     </select>
@@ -245,7 +249,7 @@
         from myty_dengmi_temp dm
         left join myty_user u on u.user_id = dm.dm_author
         left join myty_answer a on a.dm_id = dm.dm_temp_id
-        where dm.agenda_round_no = #{agenda_round_no}
+        where dm.agenda_round_no = #{agenda_round_no} and dm.dm_mimian != '' and dm.dm_mimu != '' and dm.dm_midi != ''
     </select>
 
     <select id="getGoodSubjectByRoundNo" parameterType="com.hallth.domain.DengmiQueryBean" resultType="com.hallth.domain.DengmiQueryBean">
@@ -255,7 +259,7 @@
         from myty_dengmi_temp dm
         left join myty_user u on u.user_id = dm.dm_author
         left join myty_answer a on a.dm_id = dm.dm_temp_id
-        where dm.agenda_round_no = #{agenda_round_no}
+        where dm.agenda_round_no = #{agenda_round_no} and dm.dm_mimian != '' and dm.dm_mimu != '' and dm.dm_midi != ''
         group by dm.dm_temp_id
         order by user_judge desc
         limit 0, #{pageSize}
@@ -266,7 +270,7 @@
         from myty_dengmi_temp dm
         left join myty_user u on u.user_id = dm.dm_author
         left join myty_answer a on a.dm_id = dm.dm_temp_id
-        where dm.agenda_round_no = #{agenda_round_no}
+        where dm.agenda_round_no = #{agenda_round_no} and dm.dm_mimian != '' and dm.dm_mimu != '' and dm.dm_midi != ''
         order by user_judge desc
         limit 0, 10
     </select>

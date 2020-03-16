@@ -10,12 +10,14 @@
 <html>
 <head>
     <title>谜苑天涯-输入猜射</title>
-    <link rel="stylesheet" href="/layui/css/layui.css"/>
-    <link rel="stylesheet" href="/css/myty.css"/>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.pure.tooltips.js"></script>
-    <script type="text/javascript" src="/js/myty.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+    <link rel="stylesheet" href="/font/iconfont.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/myjs.js"></script>
+    <script src="/font/iconfont.js"></script>
 </head>
 <body>
 <div style="padding: 15px;background-color: #996600; color: #fff;">
@@ -36,58 +38,124 @@
 <div style="padding: 4px; border-left: 1px solid #996600; border-right: 1px solid #996600;border-bottom: 1px solid #996600">
     5.谜底注解栏用于对谜面和谜底扣合的可能引起误会之处作一注解，评分时将显示谜底注解，以免出现误评。可不填。
 </div>
-<div style="padding: 15px;">
-    <table id="demo" lay-filter="test"></table>
+<div style="padding: 15px; width: 100%; height: 73%;">
+    <%--<table id="demo" lay-filter="test"></table>--%>
+    <table id="input_answer_table" toolbar="#input_answer_tool" style="width: 100%"></table>
 </div>
+<div id="input_answer_tool" style="height:auto; text-align: center;">
+    <form action="/export/exportSubject" id="export-form-inputAnswer" method="post">
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">本页存盘</a>
+        <input name="roundNo" value="${roundNo}" hidden/>
+        <input name="tabs" value="inputAnswer" hidden/>
+        <input name="fanwei" value="1" hidden/>
+        <input name="type"  hidden id="type"/>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(1)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为Excel
+        </a>
+        <a href="#" class="easyui-linkbutton" plain="true" onclick="submitExportForm(0)">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-export"></use>
+            </svg>
+            导出为txt
+        </a>
+    </form>
+</div>
+
 </body>
-<script>
-    layui.use('table', function () {
-        var table = layui.table;
-
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            , url: '/dengmiTemp/noAnswerSubject' //数据接口
-            , page: true //开启分页
-            , limits: [5, 10, 20, 50]
-            , limit: 10
-            // , toolbar: true
-            , cols: [[ //表头
-                {field: 'dm_mimian', title: '谜面', width: 500, fixed: 'left'}
-                , {field: 'dm_mimu', title: '谜目'}
-                , {field: 'user_answer', edit: 'text', title: '谜底'}
-                , {field: 'dm_mimianzhu', title: '谜面注解'}
-            ]]
-        });
-
-        table.on('edit(test)', function (obj) { //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
-            var value = obj.value //得到修改后的值
-                , data = obj.data //得到所在行所有键值
-                , field = obj.field; //得到字段
-            $.post("/answer/saveMyAnswer", {dmTempId: data.dm_temp_id, dmMidi: value}, function (data) {
-                if (!data.result) {
-                    layer.msg(data.msg);
-                }
-            });
-        });
-    });
-</script>
-
-
 <script type="text/javascript">
-    layui.use(['table'], function () {
-        layui.table.on('edit(edittable)', function (obj) {
-            var value = obj.value //得到修改后的值
-                , data = obj.data //得到所在行所有键值
-                , field = obj.field; //得到字段
-            $.post("updateRobotConf", {id: data.conf_key, field: field, value: value}, function (data) {
-                if (data == "true") {
-                    layer.msg("修改成功");
+    function submitExportForm(param){
+        $('#type').val(param);
+        $('#export-form-inputAnswer').submit();
+    }
+
+    var editIndex = undefined;
+    function endEditing(){
+        if (editIndex == undefined){
+            return true;
+        }
+        if ($('#input_answer_table').datagrid('validateRow', editIndex)){
+            $('#input_answer_table').datagrid('endEdit', editIndex);
+            editIndex = undefined;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function accept(){
+        if (endEditing()){
+            var data = $('#input_answer_table').datagrid('getChanges', "updated");
+            console.log('data', data);
+            if(data.length == 0){
+                $.messager.alert('提示','您没有未保存的内容。');
+                return;
+            }
+            var dmTempId = '';
+            var dmMidi = '';
+            for(var i = 0; i < data.length; i++){
+                var item = data[i];
+                dmTempId = item.dm_temp_id + '\t' + dmTempId;
+                dmMidi = item.user_answer + '\t' + dmMidi;
+            }
+            $.post("/answer/saveMyAnswer", {dmTempId: dmTempId, dmMidi: dmMidi}, function (data) {
+                if (!data.result) {
+                    $.messager.alert('提示',data.msg);
                 } else {
-                    layer.msg(data);
+                    $.messager.alert('提示','保存成功');
                 }
             });
-        });
+        }
+    }
+
+    $('#input_answer_table').datagrid({
+        fit: true, //自适应高度
+        singleSelect: true,
+        idField: 'dm_temp_id',
+        url: '/dengmiTemp/noAnswerSubject',
+        rownumbers: true,
+        pagination: true,
+        nowrap: false,
+        pageList: [10, 20, 50, 100],
+        frozenColumns: [[
+            {field: 'dm_mimian', title: '谜面', width: setWidth(20)}
+        ]],
+        columns: [[
+            {field: 'dm_temp_id', title: 'ID', hidden: true}
+            ,{field: 'dm_mimu', title: '谜目', width: setWidth(18)}
+            ,{field: 'user_answer', title: '谜底', width: setWidth(20), editor:'text'}
+            , {field: 'dm_mimianzhu', title: '谜面注解', width: setWidth(40)}
+        ]],
+        onClickCell: function (index, field, value) {
+            if (field == 'user_answer') {
+                $('#input_answer_table').datagrid('beginEdit', index);
+                if (editIndex != index){
+                    if (endEditing()){
+                        $('#input_answer_table').datagrid('selectRow', index)
+                            .datagrid('beginEdit', index);
+                        editIndex = index;
+                    } else {
+                        $('#input_answer_table').datagrid('selectRow', editIndex);
+                    }
+                }
+            }
+        }
+    });
+
+    function setWidth(percent) {
+        return $("#input_answer_table").width() * percent / 100;
+    }
+
+    $('#input_answer_table').datagrid('getPager').pagination({
+        // showPageList:true,
+        beforePageText: '第',//页数文本框前显示的汉字
+        afterPageText: '页    共 {pages} 页',
+        displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+        onBeforeRefresh: function () {
+            return true;
+        }
     });
 </script>
 </html>

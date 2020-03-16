@@ -41,6 +41,16 @@ public class MytyAnswer {
     private Integer isRight;
     private Integer agendaRoundNo;
 
+    private String userComment;
+
+    public String getUserComment() {
+        return userComment;
+    }
+
+    public void setUserComment(String userComment) {
+        this.userComment = userComment;
+    }
+
     public Integer getAgendaRoundNo() {
         return agendaRoundNo;
     }
