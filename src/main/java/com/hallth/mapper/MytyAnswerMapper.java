@@ -1,6 +1,7 @@
 package com.hallth.mapper;
 
 import com.hallth.domain.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -63,4 +64,6 @@ public interface MytyAnswerMapper {
     List<String> getAllPlayers(MytyLog log);
 
     List<MytyScore> getUserSubjectScoreDetail(MytyLog log);
+
+    List<MytyAnswer> getSubjectScoreDetail(@RequestParam("agendaRoundNo") int agendaRoundNo);
 }

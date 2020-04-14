@@ -30,6 +30,7 @@ public class ScoreQueryBean {
     private String dm_mimianzhu;
     private String dm_midizhu;
     private int rownum;
+    private int subject_rank;
     private float right_proportion;
     private String result;
     private int startRow;

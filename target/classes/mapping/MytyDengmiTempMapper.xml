@@ -277,7 +277,7 @@
 
     <select id="userCompetitionDetail" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
 select temp.rownum,temp.dm_mimian, temp.dm_mimu, temp.dm_midi, temp.dm_mimianzhu,temp.dm_midizhu,temp.dm_temp_id as dm_id,
-       temp.user_subject_score, temp.right_proportion from (
+       temp.user_subject_score, temp.right_proportion, uss.subject_rank from (
 select (@rownum := @rownum + 1) AS rownum, L.* from (
 select dm.agenda_round_no,dm.dm_temp_id, u1.user_name as author, u1.user_id,
 dm.dm_mimian, dm.dm_mimu, dm.dm_midi, dm.dm_mimianzhu, dm.dm_midizhu,
@@ -290,6 +290,7 @@ left join myty_user u1 on u1.user_id = dm.dm_author
 left join myty_answer a on a.dm_id = dm.dm_temp_id
 group by dm.agenda_round_no,dm.dm_temp_id
 order by user_subject_score desc) L, (SELECT @rownum := 0) AS rn) temp
+left  join myty_user_subject_score uss on uss.dm_id = temp.dm_temp_id
 where temp.user_id = #{user_id, jdbcType=VARCHAR} and temp.agenda_round_no = #{agenda_round_no, jdbcType=INTEGER}
         limit #{startRow}, #{pageSize}
     </select>

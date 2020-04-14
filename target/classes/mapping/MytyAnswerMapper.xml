@@ -126,7 +126,7 @@
         select temp.agenda_round_no, temp.user_name, sum(temp.answer_judge) as right_count, sum(answer_score) as user_answer_score, temp.user_id
         from (select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name, a.user_id, a.user_answer, dm.dm_midi,
          case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
-         case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+         case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 3 else 0 end answer_score
         from myty_dengmi_temp dm
         left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
         left join myty_user u1 on u1.user_id = dm.dm_author
@@ -142,7 +142,7 @@
         select count(distinct temp.user_name)
         from (select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name, a.user_answer, dm.dm_midi,
          case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
-         case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+         case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 3 else 0 end answer_score
         from myty_dengmi_temp dm
         left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
         left join myty_user u1 on u1.user_id = dm.dm_author
@@ -177,7 +177,7 @@
             from (
                 select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name,u2.user_id, a.user_answer, dm.dm_midi,
                 case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
-                case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+                case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 3 else 0 end answer_score
                 from myty_dengmi_temp dm
                 left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
                 left join myty_user u1 on u1.user_id = dm.dm_author
@@ -207,7 +207,7 @@
         (select temp.agenda_round_no, temp.user_name,temp.user_id, sum(temp.answer_judge) as right_count, sum(answer_score) as user_answer_score
         from (select a.agenda_round_no, a.dm_id, u1.user_name as dm_author_name, u2.user_name,u2.user_id, a.user_answer, dm.dm_midi,
                      case when (a.user_answer = dm.dm_midi OR a.is_right = 1) then 1 else 0 end answer_judge,
-                     case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end answer_score
+                     case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 3 else 0 end answer_score
               from myty_dengmi_temp dm
                      left join myty_answer a on dm.agenda_round_no = a.agenda_round_no and dm.dm_temp_id = a.dm_id
                      left join myty_user u1 on u1.user_id = dm.dm_author
@@ -277,7 +277,7 @@
     <select id="userAnswerDetailTable" parameterType="com.hallth.domain.ScoreQueryBean" resultType="com.hallth.domain.ScoreQueryBean">
         select dm.dm_mimian,dm.dm_mimu,dm.dm_midi,dm.dm_mimianzhu,dm.dm_midizhu,dm.dm_author as dm_author_id, u1.user_name as dm_author_name, a.user_answer,a.user_comment,
         u2.user_name, a.user_id,dm_temp_id as dm_id,
-        case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end as user_answer_score
+        case when a.user_answer = dm.dm_midi then 3 when a.is_right = 1 then 3 else 0 end as user_answer_score
         from myty_dengmi_temp dm
         left join myty_answer a on a.agenda_round_no = dm.agenda_round_no and a.dm_id=dm.dm_temp_id
         left join myty_user u1 on u1.user_id = dm.dm_author
@@ -300,7 +300,7 @@
         select a.user_id, a.user_answer,u.user_name,
         case when a.user_answer=dm.dm_midi then '中' when a.is_right = 1 then '列中' else '不中' end as result,
         a.user_judge,a.user_comment,
-        case when a.user_answer=dm.dm_midi then 3 when a.is_right = 1 then 1 else 0 end as user_answer_score
+        case when a.user_answer=dm.dm_midi then 3 when a.is_right = 1 then 3 else 0 end as user_answer_score
         from myty_answer a
         left join myty_dengmi_temp dm on a.dm_id = dm.dm_temp_id
         left join myty_user u on u.user_id = a.user_id
@@ -340,5 +340,9 @@
         left join myty_user u2 on u2.user_id = dm.dm_author
         where a.agenda_round_no = #{agendaRoundNo, jdbcType=INTEGER}
         group by dm.dm_author
+    </select>
+
+    <select id="getSubjectScoreDetail" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from myty_answer where agenda_round_no = #{agendaRoundNo, jdbcType=INTEGER} and user_judge is not null
     </select>
 </mapper>

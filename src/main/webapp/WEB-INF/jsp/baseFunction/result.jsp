@@ -225,7 +225,7 @@
                         }
                         , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(5)}
                         , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(5)}
-                        , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(5)}
+                        , {field: 'subject_rank', title: '名次', width: setSecondSubWinWidth(5)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -495,7 +495,7 @@
                         }
                         , {field: 'user_subject_score', title: '评分', width: setSecondSubWinWidth(8)}
                         , {field: 'right_proportion', title: '命中率', width: setSecondSubWinWidth(8)}
-                        , {field: 'rownum', title: '名次', width: setSecondSubWinWidth(8)}
+                        , {field: 'subject_rank', title: '名次', width: setSecondSubWinWidth(8)}
                     ]]
                 });
                 $('#subject_detail_table').datagrid('getPager').pagination({
@@ -568,7 +568,7 @@
             , {field: 'user_name', title: '作者', width: setWidth(6)}
             , {field: 'user_judge', title: '评分', sortable: true, width: setWidth(6)}
         ]],
-        onClickCell: function (index, field, value) {
+        onClickCell: function (index, field, value) {   
             if (field == 'dm_mimian') {
                 var row = $('#good_subject_table').datagrid('getRows')[index];//获取单元格所在行的所有的值
                 $('#subject-window').window('open');
@@ -683,7 +683,7 @@
         idField: 'dm_temp_id',
         nowrap: false,
         url: '/dengmiTemp/getDengmiByRoundNo',
-        rownumbers: true,
+        rownumbers: false,
         pagination: true,
         pageList: [10, 20, 50, 100],
         // frozenColumns: [[
