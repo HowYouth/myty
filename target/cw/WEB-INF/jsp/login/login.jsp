@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>谜苑天涯-登录</title>
+    <title>寒痕</title>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/layui/css/layui.css" />
@@ -13,12 +13,12 @@
 <body>
 <br/>
 <div class="top-header">
-    谜苑天涯灯谜联赛2020赛季
+    个人系统登录
 </div>
 <div class="modal-dialog" style="margin-top: 10%;">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title text-center" id="myModalLabel">谜苑天涯内赛系统登录</h4>
+            <h4 class="modal-title text-center" id="myModalLabel">个人系统登录</h4>
         </div>
         <form id="loginForm" class="layui-form layui-form-pane"  action="/login/loginCheck" method="post">
             <div class="layui-form-item">
