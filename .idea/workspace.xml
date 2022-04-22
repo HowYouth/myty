@@ -9,295 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31949586-5180-474d-93f8-ecdb569788fe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hallth/domain/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/SysUserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hallth/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hallth/system/BaseEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hallth/utils/TestUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login/choseSystem.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/33476ce6-b537-4448-a8b6-0f02ba2c135d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/33476ce6-b537-4448-a8b6-0f02ba2c135d.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/miyuantianya_myty_menu.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/myty_menu_create.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/AgendaController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/AnswerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/ExportController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/JDBCController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hallth/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/MenuManageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/MytyDengmiTempController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/PageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/ParamController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/SaiKuangController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/controller/UtilsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/DengmiQueryBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/ExportBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/JDBCBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/JSONBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyAgenda.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyAnswer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyAnswerQueryBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyDengmiTemp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyLog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyParam.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyScore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytySeq.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/MytyUserSubjectScore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/SaikuangBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/ScoreQueryBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/TbCuUserOpenBsec.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/domain/UserAnswerScore.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyAgendaMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyAnswerMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyDengmiTempMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyLogMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyMenuMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyParamMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyScoreMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytySeqMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyUserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/MytyUserSubjectScoreMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/mapper/TbCuUserOpenBsecMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/quartz/QuartzJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hallth/quartz/QuartzJob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/MytyAgendaService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/MytyAnswerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/MytyDengmiTempService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/MytyMenuService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/MytyParamService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/MytySeqService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/MytyUserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/MytyAgendaServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/MytyAnswerServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/MytyDengmiTempServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/MytyMenuServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/MytyParamServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/MytySeqServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/service/impl/MytyUserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/utils/DatabaseUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/utils/JDBCUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/utils/JsonUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/utils/PageUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/utils/SeqCreate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hallth/utils/UserScoreUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generator.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generator.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyAgendaMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyAnswerMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyDengmiTempMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyLogMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyMenuMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyParamMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyScoreMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytySeqMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapping/SysUserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/MytyUserSubjectScoreMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapping/TbCuUserOpenBsecMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/agenda.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/agendaDetail.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/allSubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/answerScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/changePassword.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/goodSubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/hisScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/home.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/inputAnswer.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/inputMySubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/liezhong.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/mySubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/pingfen.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/readMe.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/result.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/saikuang.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/subjectScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/baseFunction/thisScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/developDetail/databaseOperation.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/developDetail/developDetail.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/managerFunction/addMenu.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/managerFunction/addParam.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/managerFunction/addUser.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/managerFunction/menuManage.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/managerFunction/newAgenda.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/managerFunction/paramManage.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/managerFunction/userManage.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/AgendaController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/AnswerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/ExportController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hallth/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/MenuManageController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/MytyDengmiTempController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/PageController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/ParamController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/SaiKuangController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/controller/UtilsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/DengmiQueryBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/ExportBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/JSONBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyAgenda.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyAnswer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyAnswerQueryBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyDengmiTemp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyParam.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyScore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytySeq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/MytyUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/SaikuangBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/ScoreQueryBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/domain/UserAnswerScore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyAgendaMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyAnswerMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyDengmiTempMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyLogMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyMenuMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyParamMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyScoreMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytySeqMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/mapper/MytyUserMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/quartz/QuartzJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hallth/quartz/QuartzJob.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/MytyAgendaService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/MytyAnswerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/MytyDengmiTempService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/MytyMenuService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/MytyParamService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/MytySeqService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/MytyUserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/impl/MytyAgendaServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/impl/MytyAnswerServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/impl/MytyDengmiTempServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/impl/MytyMenuServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/impl/MytyParamServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/impl/MytySeqServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/service/impl/MytyUserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/utils/DatabaseUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/utils/JsonUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/utils/PageUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/utils/SeqCreate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hallth/utils/UserScoreUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/generator.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/generator.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyAgendaMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyAnswerMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyDengmiTempMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyLogMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyMenuMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyParamMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyScoreMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytySeqMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapping/MytyUserMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/spring-mvc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/cw/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/AgendaController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/AnswerController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/ExportController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/MenuManageController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/MytyDengmiTempController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/PageController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/ParamController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/SaiKuangController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/controller/UtilsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/DengmiQueryBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/ExportBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/JSONBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyAgenda.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyAnswer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyAnswerQueryBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyDengmiTemp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyParam.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyScore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytySeq.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/MytyUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/SaikuangBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/ScoreQueryBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/domain/UserAnswerScore.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyAgendaMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyAnswerMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyDengmiTempMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyLogMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyMenuMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyParamMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyScoreMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytySeqMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/mapper/MytyUserMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/quartz/QuartzJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/quartz/QuartzJob.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/MytyAgendaService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/MytyAnswerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/MytyDengmiTempService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/MytyMenuService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/MytyParamService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/MytySeqService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/MytyUserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/impl/MytyAgendaServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/impl/MytyAnswerServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/impl/MytyDengmiTempServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/impl/MytyMenuServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/impl/MytyParamServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/impl/MytySeqServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/service/impl/MytyUserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/utils/DatabaseUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/utils/JsonUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/utils/PageUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/utils/SeqCreate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/com/hallth/utils/UserScoreUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/generator.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/cw/WEB-INF/classes/generator.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/cw/WEB-INF/classes/jdbc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyAgendaMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyAnswerMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyDengmiTempMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyLogMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyMenuMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyParamMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyScoreMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytySeqMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/mapping/MytyUserMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/classes/spring-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/cw/WEB-INF/classes/spring-mvc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/agenda.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/agendaDetail.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/allSubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/answerScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/changePassword.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/goodSubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/hisScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/home.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/inputAnswer.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/inputMySubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/liezhong.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/mySubject.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/pingfen.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/readMe.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/result.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/saikuang.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/subjectScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/baseFunction/thisScore.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/developDetail/databaseOperation.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/developDetail/developDetail.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/login/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/login/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/managerFunction/addMenu.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/managerFunction/addParam.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/managerFunction/addUser.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/managerFunction/menuManage.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/managerFunction/newAgenda.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/managerFunction/paramManage.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cw/WEB-INF/jsp/managerFunction/userManage.jsp" beforeDir="false" />
-    </list>
+    <list default="true" id="31949586-5180-474d-93f8-ecdb569788fe" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -358,7 +70,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="154">
-                <caret line="68" column="13" lean-forward="true" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+                <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
               </first_editor>
               <second_editor />
             </state>
@@ -553,10 +265,11 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="E:/AndroidDevelopKip" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1650592006260" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1650593530749" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/sqls" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -835,7 +548,7 @@
       <workItem from="1640768075140" duration="3032000" />
       <workItem from="1640830059326" duration="4394000" />
       <workItem from="1641282576567" duration="42000" />
-      <workItem from="1650529477477" duration="6827000" />
+      <workItem from="1650529477477" duration="8520000" />
     </task>
     <task id="LOCAL-00001" summary="当前赛况更换为easyui">
       <created>1583301493817</created>
@@ -925,7 +638,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="324600000" />
+    <option name="totallyTimeSpent" value="326293000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -1451,7 +1164,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="154">
-            <caret line="68" column="13" lean-forward="true" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+            <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
           </first_editor>
           <second_editor />
         </state>
