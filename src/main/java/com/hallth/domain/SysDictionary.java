@@ -67,6 +67,7 @@ public class SysDictionary {
      * @mbggenerated
      */
     private String isAvailable;
+    private String isAvailableCn;
 
     private int startRow;
     private int pageSize;

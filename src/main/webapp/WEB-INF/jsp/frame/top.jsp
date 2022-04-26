@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="fns" uri="http://mycompany.com" %>
 <html>
 <head>
     <title>寒痕</title>
@@ -20,13 +21,9 @@
         <li class="layui-nav-item <c:if test="${pageFlag eq 'targetList'}">layui-this</c:if>"><a href="/page/toTargetList">指标管理</a></li>
         <li class="layui-nav-item <c:if test="${pageFlag eq 'menuList'}">layui-this</c:if>"><a href="/page/toMenuList">菜单管理</a></li>
         <li class="layui-nav-item">
-            <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">${loginUser.userName}</a>
-            <dl class="layui-nav-child">
-                <dd><a href="javascript:;">修改信息</a></dd>
-                <dd><a href="javascript:;">安全管理</a></dd>
-                <dd><a href="/login/loginOut">退出</a></dd>
-            </dl>
+            <img src="//t.cn/RCzsdCq" class="layui-nav-img">${loginUser.userName}
         </li>
+        <li class="layui-nav-item"><a href="/login/loginOut">退出</a></li>
     </ul>
 </div>
 </body>

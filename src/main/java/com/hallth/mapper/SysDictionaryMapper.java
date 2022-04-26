@@ -56,4 +56,12 @@ public interface SysDictionaryMapper {
     List<SysDictionary> getDictList(SysDictionary sysDictionary);
 
     int getCountDictList(SysDictionary sysDictionary);
+
+    List<SysDictionary> getDictDetails(SysDictionary sysDictionary);
+
+    String getDictValue(SysDictionary sysDictionary);
+
+    String getDictKey(SysDictionary sysDictionary);
+
+    List<SysDictionary> getDictDetailList(SysDictionary sysDictionary);
 }

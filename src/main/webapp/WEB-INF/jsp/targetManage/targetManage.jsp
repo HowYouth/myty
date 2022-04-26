@@ -19,6 +19,12 @@
 <div style="width: 100%; height: 100%; padding-top: 50px;">
     <table id="targetListTable" lay-filter="targetList"></table>
 </div>
+<script type="text/html" id="nullableTpl">
+    <input type="checkbox" name="nullalbe" value="{{d.nullalbe}}" lay-skin="switch" lay-text="是|否" lay-filter="nullalbeDemo" {{d.nullalbe=='1'?'checked':'' }}>
+</script>
+<script type="text/html" id="isPkTpl">
+    <input type="checkbox" name="isPk" value="{{d.isPk}}" lay-skin="switch" lay-text="是|否" lay-filter="nullalbeDemo" {{d.isPk=='1'?'checked':'' }}>
+</script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
@@ -39,8 +45,8 @@
                 ,{field: 'cnName', align: 'center', sort: true, title: '中文描述'}
                 ,{field: 'dataType', align: 'center', sort: true, title: '数据类型'}
                 ,{field: 'length', align: 'center', sort: true, title: '字段长度'}
-                ,{field: 'nullalbeCn', align: 'center', sort: true, title: '可为空'}
-                ,{field: 'isPk', align: 'center', sort: true, title: '主键'}
+                ,{field: 'nullalbe', align: 'center', sort: true, title: '可为空', templet: '#nullableTpl'}
+                ,{field: 'isPk', align: 'center', sort: true, title: '主键', templet: '#isPkTpl'}
                 ,{field: 'defaultValue', align: 'center', sort: true, title: '默认值'}
             ]]
         });

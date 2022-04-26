@@ -13,9 +13,9 @@
 
     <function>
         <description>通过码值获取性别的中文描述</description>
-        <name>getGender</name>
+        <name>getDictValue</name>
         <function-class>com.hallth.common.SysDictUtils</function-class>
-        <function-signature>java.lang.String getGender()</function-signature>
-        <example>${fns:getGender()}</example>
+        <function-signature>java.lang.String getDictValue(java.lang.String, java.lang.String)</function-signature>
+        <example>${fns:getDictValue(type, key)}</example>
     </function>
 </taglib>

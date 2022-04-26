@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="fns" uri="http://mycompany.com" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
@@ -19,6 +20,9 @@
 <div style="width: 100%; height: 100%; padding-top: 50px;">
     <table id="userListTable" lay-filter="userList"></table>
 </div>
+<script type="text/html" id="genderFormat">
+    <input type="checkbox" name="gender" value="{{d.gender}}" lay-skin="switch" lay-text="男|女" lay-filter="genderDemo" {{d.gender=='M'?'checked':'' }}>
+</script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
@@ -34,15 +38,25 @@
             ,url: '/user/getUserList' //数据接口
             ,page: true //开启分页
             ,id: 'userListTableReload'
+            ,toolbar: 'default'
             ,cols: [[ //表头
-                {field: 'ID',  align: 'center', title: 'ID',fixed: 'left'}
+                {field: 'ID',  align: 'center', title: 'ID',fixed: 'left', hide: true}
                 ,{field: 'loginName', align: 'center', sort: true, title: '登录名'}
                 ,{field: 'password', align: 'center', sort: true, title: '密码'}
                 ,{field: 'userName', align: 'center', sort: true, title: '用户名称'}
-                ,{field: 'gender', align: 'center', sort: true, title: '性别'}
+                ,{field: 'gender', align: 'center', sort: true, templet: '#genderFormat', title: '性别'}
             ]]
         });
     });
+    function genderFormat(row) {
+        var gender = row.gender;
+        var showValue = 'error|'+gender;
+        async : $.post("/dict/getDictValue/GENDER/" + gender, {}, function(resp){
+            console.log('resp', resp)
+            showValue = resp.data;
+        }, "json");
+        return showValue;
+    }
 </script>
 </body>
 </html>

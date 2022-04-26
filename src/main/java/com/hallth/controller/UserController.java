@@ -1,5 +1,6 @@
 package com.hallth.controller;
 
+import com.hallth.common.SysDictUtils;
 import com.hallth.domain.User;
 import com.hallth.service.impl.UserServiceImpl;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ public class UserController {
         model.addAttribute("loginUser", loginUser);
         int currentPage = Integer.parseInt(request.getParameter("page"));
         int pageSize = Integer.parseInt(request.getParameter("limit"));
+        model.addAttribute("genderList", SysDictUtils.getDictDetailList("GENDER"));
         Map<String, Object> map = userService.getUserList(currentPage, pageSize);
         return map;
     }

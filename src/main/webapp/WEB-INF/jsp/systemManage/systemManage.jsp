@@ -19,6 +19,9 @@
 <div style="width: 100%; height: 100%; padding-top: 50px;">
     <table id="sysListTable" lay-filter="sysList"></table>
 </div>
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="isAvailable" value="{{d.isAvailable}}" lay-skin="switch" lay-text="是|否" lay-filter="isAvailDemo" {{d.isAvailable=='1'?'checked':'' }}>
+</script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
@@ -40,7 +43,7 @@
                 ,{field: 'homeAddress', align: 'center', sort: true, title: '访问地址'}
                 ,{field: 'sysAbbreviations', align: 'center', sort: true, title: '系统简称'}
                 ,{field: 'sysIcon', align: 'center', sort: true, title: '图标'}
-                ,{field: 'isAvailableCn', align: 'center', sort: true, title: '是否可用'}
+                ,{field: 'isAvailable', align: 'center', sort: true, title: '是否可用', templet: '#switchTpl'}
             ]]
         });
     });

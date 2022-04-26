@@ -3,6 +3,7 @@ package com.hallth.controller;
 import com.hallth.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -47,5 +48,13 @@ public class PageJumpController {
     public String toMenuList(HttpServletRequest request, Model model){
         model.addAttribute("pageFlag", "menuList");
         return "menuManage/menuManage";
+    }
+
+    @RequestMapping(value="/toDictDetails/{type}/{description}", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toDictDetails(@PathVariable("type")String type,@PathVariable("description")String description, HttpServletRequest request, Model model){
+        model.addAttribute("pageFlag", "menuList");
+        model.addAttribute("type", type);
+        model.addAttribute("description", description);
+        return "dictionaryManage/dictionaryDetails";
     }
 }

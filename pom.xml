@@ -251,6 +251,12 @@
             <artifactId>spring-context-support</artifactId>
             <version>3.2.11.RELEASE</version>
         </dependency>
+<!--        结合layUI实现对table的字典项转换-->
+        <dependency>
+            <groupId>org.directwebremoting</groupId>
+            <artifactId>dwr</artifactId>
+            <version>3.0.2-RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

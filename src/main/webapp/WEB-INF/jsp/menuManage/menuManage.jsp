@@ -19,6 +19,12 @@
 <div style="width: 100%; height: 100%; padding-top: 50px;">
     <table id="menuListTable" lay-filter="menuList"></table>
 </div>
+<script type="text/html" id="hiddenTpl">
+    <input type="checkbox" name="hidden" value="{{d.hidden}}" lay-skin="switch" lay-text="是|否" lay-filter="hiddenDemo" {{d.hidden=='1'?'checked':'' }}>
+</script>
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="isAvailable" value="{{d.isAvailable}}" lay-skin="switch" lay-text="是|否" lay-filter="isAvailDemo" {{d.isAvailable=='1'?'checked':'' }}>
+</script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
@@ -39,8 +45,8 @@
                 ,{field: 'menuName', align: 'center', sort: true, title: '菜单名称'}
                 ,{field: 'menuIcon', align: 'center', sort: true, title: '图标'}
                 ,{field: 'menuUrl', align: 'center', sort: true, title: '菜单路径'}
-                ,{field: 'hiddenCn', align: 'center', sort: true, title: '是否隐藏'}
-                ,{field: 'isAvailableCn', align: 'center', sort: true, title: '是否可用'}
+                ,{field: 'hidden', align: 'center', sort: true, title: '是否隐藏', templet: '#hiddenTpl'}
+                ,{field: 'isAvailable', align: 'center', sort: true, title: '是否可用', templet: '#switchTpl'}
                 ,{field: 'parentMenuName', align: 'center', sort: true, title: '上级菜单'}
                 ,{field: 'menuFlag', align: 'center', sort: true, title: '菜单标志'}
             ]]

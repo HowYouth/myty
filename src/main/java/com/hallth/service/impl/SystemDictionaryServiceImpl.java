@@ -31,4 +31,25 @@ public class SystemDictionaryServiceImpl implements SystemDictionaryService {
         map.put("data",list);
         return map;
     }
+
+    @Override
+    public Map<String, Object> getDictDetails(SysDictionary sysDictionary) {
+        List<SysDictionary> list = sysDictionaryMapper.getDictDetails(sysDictionary);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "");
+//        map.put("count",total);
+        map.put("data",list);
+        return map;
+    }
+
+    @Override
+    public String getDictValue(SysDictionary sysDictionary) {
+        return sysDictionaryMapper.getDictValue(sysDictionary);
+    }
+
+    @Override
+    public String getDictKey(SysDictionary sysDictionary) {
+        return sysDictionaryMapper.getDictKey(sysDictionary);
+    }
 }
