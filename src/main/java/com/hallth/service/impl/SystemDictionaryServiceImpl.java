@@ -52,4 +52,44 @@ public class SystemDictionaryServiceImpl implements SystemDictionaryService {
     public String getDictKey(SysDictionary sysDictionary) {
         return sysDictionaryMapper.getDictKey(sysDictionary);
     }
+
+    @Override
+    public Map<String, Object> updateIfNotNull(SysDictionary sysDictionary) {
+        Map<String, Object> map = new HashMap<>();
+        try{
+            int res = sysDictionaryMapper.updateByPrimaryKeySelective(sysDictionary);
+            map.put("success", true);
+        } catch (Exception e){
+            map.put("success", false);
+            map.put("errorMsg", e.getMessage());
+        }
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> deleteDict(SysDictionary sysDictionary) {
+        Map<String, Object> map = new HashMap<>();
+        try{
+            int res = sysDictionaryMapper.deleteDict(sysDictionary);
+            map.put("success", true);
+        } catch (Exception e){
+            map.put("success", false);
+            map.put("errorMsg", e.getMessage());
+        }
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> deleteKey(SysDictionary sysDictionary) {
+        Map<String, Object> map = new HashMap<>();
+        try{
+            sysDictionary.setDelFlag(sysDictionary.getDelFlag().equals("1")? "0" : "1");
+            int res = sysDictionaryMapper.deleteKey(sysDictionary);
+            map.put("success", true);
+        } catch (Exception e){
+            map.put("success", false);
+            map.put("errorMsg", e.getMessage());
+        }
+        return map;
+    }
 }

@@ -17,24 +17,24 @@
     <jsp:include page="/page/top"></jsp:include>
 </div>
 <div style="width: 100%; height: 100%; padding-top: 50px;">
-    <table id="dictionaryListTable" lay-filter="dictionaryList"></table>
+    <table id="dictionaryListTable" lay-filter="dictionaryList" lay-data="{id: 'dictionaryListData'}"></table>
 </div>
 <script type="text/html" id="barDemo">
     <div class="layui-btn-group">
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</button>
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">编辑</button>
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">删除</button>
+        <button type="button" class="layui-btn layui-btn-xs" lay-event="detail" title="编辑">
+            <i class="layui-icon">&#xe642;</i>
+        </button>
+        <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" title="删除">
+            <i class="layui-icon">&#xe640;</i>
+        </button>
     </div>
 </script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function(){
-        var element = layui.element;
-
-        //…
-    });
-    layui.use('table', function(){
-        var table = layui.table;
+    layui.use(['table','element','layer'], function(){
+        var table = layui.table
+        ,element = layui.element
+        ,layer = layui.layer;
         //第一个实例
         table.render({
             elem: '#dictionaryListTable'
@@ -55,15 +55,43 @@
                     type: 2
                     ,title: '字典项' + data.type + '(' + data.description + ')'
                     ,area:['1000px', '400px']
-                    ,content: '/page/toDictDetails/'+data.type+'/'+data.description //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                    ,closeBtn: 2
+                    ,maxmin: true
+                    ,content: ['/page/toDictDetails/'+data.type+'/'+data.description, 'no'] //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
                 });
-            } else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
+            } else if(obj.event === 'delete'){
+                layer.open({
+                    type: 0
+                    ,content: '确定删除字典项'+data.type+'('+data.description + ')?'
+                    ,title: '警告'
+                    ,btn: ['确定', '取消']
+                    ,icon: 0
+                    ,closeBtn: 2
+                    ,yes: function(index, layero){
+                        //按钮【按钮一】的回调
+                        $.post("/dict/deleteDict", data, function (resp) {
+                            console.log('resp', resp.success);
+                            if (resp.success) {
+                                layer.close(index); //如果设定了回调，需进行手工关闭
+                                layer.msg('删除成功！', {
+                                    time: 1500
+                                });
+                                table.reload('dictionaryListTableReload', {
+                                    url: '/dict/getDictList' //数据接口
+                                });
+                            } else {
+                                layer.msg(resp.errorMsg, {
+                                    time: 1500
+                                });
+                            }
+                        });
+                    }
+                    ,btn2: function(index, layero){
+                        //按钮【按钮二】的回调
+                        // return false; //开启该代码可禁止点击该按钮关闭
+                        layer.close(index); //如果设定了回调，需进行手工关闭
+                    }
                 });
-            } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data))
             }
         });
     });

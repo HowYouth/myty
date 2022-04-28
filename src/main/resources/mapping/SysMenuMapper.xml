@@ -15,7 +15,8 @@
     menu.MENU_FLAG as "menuFlag",
     dict1.value as "hiddenCn",
     dict2.value as "isAvailableCn",
-    pMenu.menu_name as "parentMenuName"
+    pMenu.menu_name as "parentMenuName",
+    pMenu.menu_flag as "parentMenuFlag"
   </sql>
   <sql id="leftJoin">
     left join sys_dictionary dict1 on dict1.type = 'YES_NO' and dict1.key = menu.HIDDEN
@@ -39,6 +40,9 @@
       <if test="menuName != null and menuName != ''">
         and menu.MENU_NAME like '%' || #{menuName, jdbcType=VARCHAR} || '%'
       </if>
+      <if test="parentId != null">
+        and menu.PARENT_ID = #{parentId, jdbcType=INTEGER}
+      </if>
     </where>
     order by menu.ID
     limit #{startRow}, #{pageSize}
@@ -59,5 +63,15 @@
         and menu.MENU_NAME like '%' || #{menuName, jdbcType=VARCHAR} || '%'
       </if>
     </where>
+  </select>
+
+  <select id="getChildrenMenuList" resultType="com.hallth.domain.SysMenu" parameterType="com.hallth.domain.SysMenu">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_menu  menu
+    <include refid="leftJoin"/>
+    where menu.IS_AVAILABLE = '1'
+        and menu.PARENT_ID = #{parentId, jdbcType=INTEGER}
+    order by menu.ID
   </select>
 </mapper>

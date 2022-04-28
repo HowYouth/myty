@@ -74,4 +74,28 @@ public class DictionaryController {
         sysDictionary.setIsAvailable("1");
         return systemDictionaryService.getDictKey(sysDictionary);
     }
+
+    @RequestMapping(value="/edit", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> edit(SysDictionary sysDictionary, HttpServletRequest request, Model model){
+        Map<String, Object> map = systemDictionaryService.updateIfNotNull(sysDictionary);
+        return map;
+    }
+
+    @RequestMapping(value="/deleteDict", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> deleteDict(SysDictionary sysDictionary, HttpServletRequest request, Model model){
+        Map<String, Object> map = systemDictionaryService.deleteDict(sysDictionary);
+        return map;
+    }
+
+    @RequestMapping(value="/deleteKey", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> deleteKey(SysDictionary sysDictionary, HttpServletRequest request, Model model){
+        Map<String, Object> map = systemDictionaryService.deleteKey(sysDictionary);
+        return map;
+    }
+
+    @RequestMapping(value="/keyRollback", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> keyRollback(SysDictionary sysDictionary, HttpServletRequest request, Model model){
+        Map<String, Object> map = systemDictionaryService.deleteKey(sysDictionary);
+        return map;
+    }
 }

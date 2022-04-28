@@ -5,9 +5,6 @@
     overflow: hidden;
 }
 
-sys-menu{
-}
-
 .menuDiv{
     cursor:pointer;
     height: 30px;
@@ -18,10 +15,6 @@ sys-menu{
 .menu-hover{
     font-size: larger;
     background-color: #9F9F9F;
-}
-
-.test{
-    top: -5px;
 }
 
 .sys-menu-li{
@@ -45,4 +38,24 @@ sys-menu{
     color: wheat;
     background-color: #996600;
     margin: auto;
+}
+
+.topMenu {
+    width: 100%;
+    height: 6%;
+    float: left;
+}
+
+.leftMenu {
+    float: left;
+    margin-top: 8px;
+    height: 92%
+}
+
+.content-area {
+    float: right;
+    height: 92%;
+    margin-top: 10px;
+    margin-right: 15px;
+    width: 88%
 }

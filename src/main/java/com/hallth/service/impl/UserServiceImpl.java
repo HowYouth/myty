@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getById(String userId) {
+    public User getById(int userId) {
         User user = new User();
         user.setId(userId);
         return sysUserMapper.getById(user);
@@ -41,6 +41,37 @@ public class UserServiceImpl implements UserService{
         map.put("msg", "");
         map.put("count",total);
         map.put("data",list);
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> addUser(User user) {
+        Map<String, Object> map = new HashMap<>();
+        try{
+            int nextId = sysUserMapper.getNextId();
+            user.setId(nextId);
+            sysUserMapper.insert(user);
+            map.put("path", "/page/toUserList");
+            map.put("success", true);
+            map.put("errorMsg","用户新增成功");
+        } catch (Exception e){
+            map.put("success", false);
+            map.put("errorMsg",e.getMessage());
+        }
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> updateIfNotNull(User user) {
+        Map<String, Object> map = new HashMap<>();
+        try{
+            sysUserMapper.updateIfNotNull(user);
+            map.put("success", true);
+            map.put("errorMsg","用户修改成功");
+        } catch (Exception e){
+            map.put("success", false);
+            map.put("errorMsg",e.getMessage());
+        }
         return map;
     }
 }

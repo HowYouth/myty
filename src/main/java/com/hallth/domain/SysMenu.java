@@ -21,4 +21,5 @@ public class SysMenu {
     private int parentId;
     private String parentMenuName;
     private String menuFlag;
+    private String parentMenuFlag;
 }

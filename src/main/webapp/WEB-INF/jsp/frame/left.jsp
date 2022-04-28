@@ -13,16 +13,10 @@
     <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
-<ul class="layui-nav" lay-filter="" style="width: 100%;">
-    <c:forEach items="${fns:getChildrenMenuList(0)}" var="topMenu">
-        <li class="layui-nav-item <c:if test="${topPageFlag eq topMenu.menuFlag}">layui-this</c:if>"><a href="${topMenu.menuUrl}?menuId=${topMenu.id}">${topMenu.menuName}</a></li>
-    </c:forEach>
-    <li class="layui-nav-item">
-        <img src="/img/头像1.jpg" class="layui-nav-img">${loginUser.userName}
-    </li>
-    <li class="layui-nav-item"><a href="/login/loginOut">退出</a></li>
-</ul>
-<input id="loginUserId" value="${loginUser.id}" hidden>
-<input id="systemId" value="${systemInfo.id}" hidden>
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="width: 100%">
+        <c:forEach items="${fns:getChildrenMenuList(parentId)}" var="leftMenu">
+            <li class="layui-nav-item <c:if test="${leftPageFlag eq leftMenu.menuFlag}">layui-this</c:if>"><a href="${leftMenu.menuUrl}?menuId=${leftMenu.parentId}">${leftMenu.menuName}</a></li>
+        </c:forEach>
+    </ul>
 </body>
 </html>

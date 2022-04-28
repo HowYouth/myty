@@ -75,11 +75,13 @@ public class LoginController {
     }
 
     @RequestMapping(value="/jump", method = {RequestMethod.GET, RequestMethod.POST})
-    public String jump(@RequestParam("systemId")Integer systemId, @RequestParam("userId")String userId,
+    public String jump(@RequestParam("systemId")Integer systemId, @RequestParam("userId")int userId,
                        HttpServletRequest request, Model model){
         SystemInfo systemInfo = systemInfoService.selectByPrimaryKey(systemId);
         User loginUser = userService.getById(userId);
         model.addAttribute("loginUser", loginUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("systemInfo", systemInfo);
         return systemInfo.getHomeAddress();
     }
 }

@@ -12,4 +12,10 @@ public interface SystemDictionaryService {
     String getDictValue(SysDictionary sysDictionary);
 
     String getDictKey(SysDictionary sysDictionary);
+
+    Map<String, Object> updateIfNotNull(SysDictionary sysDictionary);
+
+    Map<String, Object> deleteDict(SysDictionary sysDictionary);
+
+    Map<String, Object> deleteKey(SysDictionary sysDictionary);
 }

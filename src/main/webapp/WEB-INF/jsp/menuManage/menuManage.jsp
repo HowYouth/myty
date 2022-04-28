@@ -41,7 +41,7 @@
             ,page: true //开启分页
             ,id: 'menuListTableReload'
             ,cols: [[ //表头
-                {field: 'sysName',  align: 'center', title: '所属系统',fixed: 'left'}
+                {field: 'sysName',  align: 'center', title: '所属系统'}
                 ,{field: 'menuName', align: 'center', sort: true, title: '菜单名称'}
                 ,{field: 'menuIcon', align: 'center', sort: true, title: '图标'}
                 ,{field: 'menuUrl', align: 'center', sort: true, title: '菜单路径'}

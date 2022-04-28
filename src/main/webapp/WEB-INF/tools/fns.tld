@@ -18,4 +18,19 @@
         <function-signature>java.lang.String getDictValue(java.lang.String, java.lang.String)</function-signature>
         <example>${fns:getDictValue(type, key)}</example>
     </function>
+
+    <function>
+        <description>通过类型获取字典项</description>
+        <name>getDictDetailList</name>
+        <function-class>com.hallth.common.SysDictUtils</function-class>
+        <function-signature>java.util.List getDictDetailList(java.lang.String)</function-signature>
+        <example>${fns:getDictDetailList(type)}</example>
+    </function>
+    <function>
+        <description>获取所有可用的子菜单菜单列表</description>
+        <name>getChildrenMenuList</name>
+        <function-class>com.hallth.common.MenuUtils</function-class>
+        <function-signature>java.util.List getChildrenMenuList(java.lang.Integer))</function-signature>
+        <example>${fns:getChildrenMenuList(parentId)}</example>
+    </function>
 </taglib>

@@ -38,7 +38,8 @@
             ,page: true //开启分页
             ,id: 'sysListTableReload'
             ,cols: [[ //表头
-                {field: 'sysId',  align: 'center', title: '系统标识',fixed: 'left'}
+                {field: 'id',  align: 'center', title: 'id'}
+                ,{field: 'sysId',  align: 'center', title: '系统标识'}
                 ,{field: 'sysName', align: 'center', sort: true, title: '系统名称'}
                 ,{field: 'homeAddress', align: 'center', sort: true, title: '访问地址'}
                 ,{field: 'sysAbbreviations', align: 'center', sort: true, title: '系统简称'}

@@ -14,4 +14,10 @@ public interface SysUserMapper {
     List<User> getUserList(UserQueryEntry scoreQueryBean);
 
     int getCountUserList(UserQueryEntry scoreQueryBean);
+
+    int getNextId();
+
+    int insert(User user);
+
+    int updateIfNotNull(User user);
 }

@@ -3,6 +3,7 @@ package com.hallth.mapper;
 import com.hallth.domain.SysDictionary;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysDictionaryMapper {
     /**
@@ -64,4 +65,10 @@ public interface SysDictionaryMapper {
     String getDictKey(SysDictionary sysDictionary);
 
     List<SysDictionary> getDictDetailList(SysDictionary sysDictionary);
+
+    int updateIfNotNull(SysDictionary sysDictionary);
+
+    int deleteDict(SysDictionary sysDictionary);
+
+    int deleteKey(SysDictionary sysDictionary);
 }

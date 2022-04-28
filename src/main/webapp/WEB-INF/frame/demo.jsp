@@ -12,12 +12,9 @@
     <script type="text/javascript" src="/layui/layui.js"></script>
 </head>
 <body>
-
-<div style="width: 90%; height: 6%;  float: left;">
-    <ul class="layui-nav" lay-filter="" style="width: 100%;  border-bottom: 1px solid red">
+<div style="width: 100%; height: 6%;  float: left; border: 1px red solid;">
+    <ul class="layui-nav" lay-filter="" style="width: 100%;">
         <li class="layui-nav-item"><a href="">用户管理</a></li>
-        <li class="layui-nav-item layui-this"><a href="">系统管理</a></li>
-        <li class="layui-nav-item"><a href="">字典项管理</a></li>
         <li class="layui-nav-item">
             <a href="javascript:;">解决方案</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
@@ -26,11 +23,6 @@
                 <dd><a href="">电商平台</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item"><a href="">社区</a></li>
-    </ul>
-</div>
-<div style="width: 10%; height: 6%; float: right">
-    <ul class="layui-nav" lay-filter="" style="width: 100%; border-bottom: 1px solid red;">
         <li class="layui-nav-item">
             <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">${loginUser.userName}</a>
             <dl class="layui-nav-child">
@@ -41,38 +33,14 @@
         </li>
     </ul>
 </div>
-<div>
-    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px; height: 94%">
-        <li class="layui-nav-item layui-nav-itemed"> <a href="javascript:;">默认展开</a>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="javascript:;">选项一</a>
-                </dd>
-                <dd>
-                    <a href="javascript:;">选项二</a>
-                </dd>
-                <dd>
-                    <a href="javascript:;">选项三</a>
-                </dd>
-                <dd>
-                    <a href="">跳转项</a>
-                </dd>
-            </dl> </li>
-        <li class="layui-nav-item"> <a href="javascript:;">解决方案</a>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="">移动模块</a>
-                </dd>
-                <dd>
-                    <a href="">后台模版</a>
-                </dd>
-                <dd>
-                    <a href="">电商平台</a>
-                </dd>
-            </dl> </li>
+<div style="float: left; border: 1px solid blue;margin-top: 8px; height: 92%">
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="height: 100%">
         <li class="layui-nav-item"><a href="">云市场</a></li>
         <li class="layui-nav-item"><a href="">社区</a></li>
     </ul>
+</div>
+<div style="float: right; border: 1px solid greenyellow; height: 92%;margin-top: 10px; margin-right: 15px; width: 88%">
+    你看看
 </div>
 
 <script>

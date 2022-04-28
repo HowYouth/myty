@@ -27,22 +27,19 @@
 </script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function(){
-        var element = layui.element;
-
-        //…
-    });
-    layui.use('table', function(){
-        var table = layui.table;
+    layui.use(['table','element'], function(){
+        var table = layui.table
+        ,element = layui.element;
         //第一个实例
         table.render({
             elem: '#targetListTable'
             ,url: '/target/getTargetList' //数据接口
             ,page: true //开启分页
             ,id: 'targetListTableReload'
+            ,limits: [5,10,20,50,100]
             ,cols: [[ //表头
-                {field: 'enName',  align: 'center', title: '字段名',fixed: 'left'}
-                ,{field: 'cnName', align: 'center', sort: true, title: '中文描述'}
+                {field: 'enName',  align: 'center', title: '字段名'}
+                ,{field: 'cnName', align: 'center', sort: true, title: '中文描述',edit:'text'}
                 ,{field: 'dataType', align: 'center', sort: true, title: '数据类型'}
                 ,{field: 'length', align: 'center', sort: true, title: '字段长度'}
                 ,{field: 'nullalbe', align: 'center', sort: true, title: '可为空', templet: '#nullableTpl'}
